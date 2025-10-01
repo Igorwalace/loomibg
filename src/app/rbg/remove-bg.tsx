@@ -34,7 +34,7 @@ function RemoveBG() {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (u) => {
-            setUser(u!)
+            setUser(u)
         })
         return () => unsubscribe()
     }, [])
