@@ -37,9 +37,9 @@ function DialogRemoveBg() {
 
     const { dialogRemoveBg, setDialogRemoveBg, file, fileEdit, setFileEdit } = useAppRemoveBg()
     const { setLoading, loading } = useAppUtils()
-    
+
     const user = auth.currentUser
-        
+
     const [check, setCheck] = useState(false)
     const [textGerention, setTextGerantion] = useState<string>('')
     const [phrase, setPhrase] = useState('')
@@ -71,14 +71,16 @@ function DialogRemoveBg() {
         if (!file) {
             return
         }
-        console.log('ok')
+
+        console.log('OK REMOVE_BG')
 
         const form = new FormData();
         form.append("image_file", file);
 
         try {
             setLoading(true)
-            const response = await fetch(CLICKDROP_URL_REMOVE_BG!, {
+            if (!CLICKDROP_URL_REMOVE_BG) return
+            const response = await fetch(CLICKDROP_URL_REMOVE_BG, {
                 method: 'POST',
                 headers: {
                     'x-api-key': API_KEY!,
@@ -88,14 +90,15 @@ function DialogRemoveBg() {
             const buffer = await response.arrayBuffer();
             const blob = new Blob([buffer], { type: "image/png" });
 
-            const newFile = new File([blob], `${user?.uid}/your-image.png`, { type: "image/png" });
+            const newFile = new File([blob], `${user?.uid}/${user?.uid}.png`, { type: "image/png" });
 
+            if (!BUCKET_ID_IMAGE) return
             const result = await storage.createFile(
-                BUCKET_ID_IMAGE!,
+                BUCKET_ID_IMAGE,
                 ID.unique(),
                 newFile
             );
-            const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE!, result.$id)
+            const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE, result.$id)
             setFileEdit(GetUrlFilePublic)
             setLoading(false)
 
@@ -108,7 +111,7 @@ function DialogRemoveBg() {
         const link = document.createElement("a");
         link.href = fileEdit;
         link.target = "_blank";
-        link.rel = "noopener noreferrer"; 
+        link.rel = "noopener noreferrer";
         link.click();
     };
 
@@ -167,7 +170,8 @@ function DialogRemoveBg() {
                                         className={`rounded-2xl ${!check ? 'object-contain p-2' : "object-cover"} opacity-0 duration-3000 border-2 border-white`}
                                         src={fileEdit}
                                         fill
-                                        onLoadingComplete={(img) => {
+                                        onLoad={(e) => {
+                                            const img = e.currentTarget
                                             img.style.opacity = '1'
                                         }}
                                         alt="A sua nova imagem gerada por nossa IA."
@@ -198,7 +202,13 @@ function DialogRemoveBg() {
                                         disabled={loading}
                                         className={`${loading && 'w-full durantion-200 hover:scale-[1]'} bg-[#006666] text-white cursor-pointer hover:scale-[1.01] w-2/4 rounded-md font-extrabold px-4 py-2 duration-200`}
                                     >
-                                        Gerar Imagem
+                                        {
+                                            !loading
+                                                ?
+                                                'Gerar Imagem'
+                                                :
+                                                'Loading'
+                                        }
                                     </button>
                                     <button
                                         onClick={() => {

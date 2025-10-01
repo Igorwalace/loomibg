@@ -20,7 +20,6 @@ function Upload() {
                 file
             );
             console.log(promise)
-            alert('OK')
         } catch (error) {
             console.log(error)
         }

@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
       },
       {
         hostname: 'fra.cloud.appwrite.io',
+      },
+      {
+        hostname: 'tor.cloud.appwrite.io',
       }
     ],
   },
