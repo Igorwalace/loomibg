@@ -5,7 +5,6 @@ import Header from '../pages/header'
 import { CiGrid41 } from "react-icons/ci";
 
 // pages
-import ListFiles from './listFiles';
 
 function Page() {
   return (
@@ -22,7 +21,7 @@ function Page() {
         </div>
 
         <div>
-          <ListFiles />
+          {/* <ListFiles /> */}
         </div>
 
       </div>
