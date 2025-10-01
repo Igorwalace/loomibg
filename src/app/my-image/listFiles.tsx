@@ -26,7 +26,7 @@ function ListFiles() {
 
     useEffect(() => {
         const ObterFile = async () => {
-            if(!BUCKET_ID_IMAGE) return
+            if (!BUCKET_ID_IMAGE) return
 
             const result = await storage.listFiles(BUCKET_ID_IMAGE);
 
@@ -49,13 +49,17 @@ function ListFiles() {
             {
                 imagesUser.map((image) => (
                     <div key={image} className=' rounded-2xl hover:scale-[1.02] cursor-pointer duration-200' >
-                        <Image
-                            className='rounded-2xl object-cover border-2 border-[#dfdfdf]'
-                            width={200}
-                            height={200}
-                            src={image}
-                            alt=''
-                        />
+                        {
+                            image != undefined
+                            &&
+                            <Image
+                                className='rounded-2xl object-cover border-2 border-[#dfdfdf]'
+                                width={200}
+                                height={200}
+                                src={image}
+                                alt=''
+                            />
+                        }
                     </div>
                 ))
             }
