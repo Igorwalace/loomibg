@@ -35,13 +35,11 @@ import { motion } from "framer-motion";
 
 function DialogRemoveBg() {
 
-    if (!API_KEY || !CLICKDROP_URL_REMOVE_BG) return
-
-    const user = auth.currentUser
-
     const { dialogRemoveBg, setDialogRemoveBg, file, fileEdit, setFileEdit } = useAppRemoveBg()
     const { setLoading, loading } = useAppUtils()
-
+    
+    const user = auth.currentUser
+        
     const [check, setCheck] = useState(false)
     const [textGerention, setTextGerantion] = useState<string>('')
     const [phrase, setPhrase] = useState('')

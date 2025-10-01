@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { storage } from '@/app/utils/appwrite';
 import { auth } from '../utils/firebase';
 import { BUCKET_ID_IMAGE } from '../components/upload';
-import { Models } from 'appwrite';
 import Image from 'next/image';
 
 function ListFiles() {
 
-    const [files, setFiles] = useState<Models.File[] | null>(null);
+    // const [files, setFiles] = useState<Models.File[] | null>(null);
     const [user, setUser] = useState(auth.currentUser)
     const [imagesUser, setImagesUser] = useState<string[]>([])
+
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
@@ -22,9 +22,14 @@ function ListFiles() {
 
     useEffect(() => {
         const ObterFile = async () => {
-            const result = await storage.listFiles(BUCKET_ID_IMAGE!);
-            const resultUser = result.files.filter((file) => (file.name.includes(user?.uid!)))
-            setFiles(resultUser)
+            if(!BUCKET_ID_IMAGE) return
+
+            const result = await storage.listFiles(BUCKET_ID_IMAGE);
+
+            if (!user) return
+
+            const resultUser = result.files.filter((file) => (file.name.includes(user?.uid)))
+            // setFiles(resultUser)
 
             const urls = resultUser.map((result) => (
                 storage.getFileView(BUCKET_ID_IMAGE!, result.$id)

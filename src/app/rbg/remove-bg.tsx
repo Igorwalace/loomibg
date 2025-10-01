@@ -14,12 +14,7 @@ import { LuPlus } from "react-icons/lu";
 import { auth } from '../utils/firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 
-//db
-import { ID } from 'appwrite';
-import { storage } from '../utils/appwrite';
-
 //pages
-import { BUCKET_ID_IMAGE } from '../components/upload';
 import DialogLogin from './dialog-login';
 
 //context

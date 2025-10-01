@@ -58,7 +58,7 @@ function SignIn() {
             {
                 user?.uid === undefined
                     ?
-                    <button onClick={SignIn} className='bg-[#006666] p-2 rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-2 items-center justify-center' >
+                    <button onClick={SignIn} className='bg-[#006666] p-2 px-5 rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-3 items-center justify-center' >
                         <BsPersonCircle className="w-7 h-7 text-white" />
                         <span className='text-sm text-white font-extrabold' > Login</span>
                     </button>
@@ -68,7 +68,7 @@ function SignIn() {
                         <DropdownMenu>
                             <DropdownMenuTrigger className='bg-[#006666] p-2 rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-2 items-center justify-center' >
                                 <Avatar className='border-1 border-white' >
-                                    <AvatarImage src={user?.photoURL!} />
+                                    <AvatarImage src={user?.photoURL || undefined} />
                                     {
                                         name != undefined
                                         &&
@@ -81,11 +81,11 @@ function SignIn() {
 
                                 <DropdownMenuLabel className='flex justify-center' >
                                     <Avatar className='border-1 border-white w-20 h-20' >
-                                        <AvatarImage src={user?.photoURL!} />
+                                        <AvatarImage src={user?.photoURL || undefined} />
                                         {
                                             name != undefined
                                             &&
-                                            <AvatarFallback>{name.charAt(0) + name.charAt(1).toLocaleUpperCase()}</AvatarFallback>
+                                            <AvatarFallback className='text-3xl flex justify-center items-center' >{name.charAt(0) + name.charAt(1).toLocaleUpperCase()}</AvatarFallback>
                                         }
                                     </Avatar>
                                 </DropdownMenuLabel>
