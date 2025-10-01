@@ -1,8 +1,12 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+
+// db
 import { storage } from '@/app/utils/appwrite';
 import { auth } from '../utils/firebase';
 import { BUCKET_ID_IMAGE } from '../components/upload';
+
+// react
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 
 function ListFiles() {
