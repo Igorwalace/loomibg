@@ -78,10 +78,12 @@ function DialogRemoveBg() {
 
         try {
             setLoading(true)
-            const response = await fetch(CLICKDROP_URL_REMOVE_BG!, {
+            if(!CLICKDROP_URL_REMOVE_BG) return
+            if(!API_KEY) return
+            const response = await fetch(CLICKDROP_URL_REMOVE_BG, {
                 method: 'POST',
                 headers: {
-                    'x-api-key': API_KEY!,
+                    'x-api-key': API_KEY,
                 },
                 body: form,
             })
@@ -90,12 +92,13 @@ function DialogRemoveBg() {
 
             const newFile = new File([blob], `${user?.uid}/your-image.png`, { type: "image/png" });
 
+            if(!BUCKET_ID_IMAGE) return
             const result = await storage.createFile(
-                BUCKET_ID_IMAGE!,
+                BUCKET_ID_IMAGE,
                 ID.unique(),
                 newFile
             );
-            const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE!, result.$id)
+            const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE, result.$id)
             setFileEdit(GetUrlFilePublic)
             setLoading(false)
 
