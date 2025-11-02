@@ -83,7 +83,7 @@ function DialogRemoveBg() {
             const response = await fetch(CLICKDROP_URL_REMOVE_BG, {
                 method: 'POST',
                 headers: {
-                    'x-api-key': API_KEY!,
+                    'x-api-key': API_KEY,
                 },
                 body: form,
             })
@@ -93,6 +93,7 @@ function DialogRemoveBg() {
             const newFile = new File([blob], `${user?.uid}/${user?.uid}.png`, { type: "image/png" });
 
             if (!BUCKET_ID_IMAGE) return
+            if(!BUCKET_ID_IMAGE) return
             const result = await storage.createFile(
                 BUCKET_ID_IMAGE,
                 ID.unique(),
