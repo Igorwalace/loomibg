@@ -58,26 +58,26 @@ function SignIn() {
             {
                 user?.uid === undefined
                     ?
-                    <button onClick={SignIn} className='bg-[#006666] p-2 px-5 rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-3 items-center justify-center' >
-                        <BsPersonCircle className="w-7 h-7 text-white" />
-                        <span className='text-sm text-white font-extrabold' > Login</span>
+                    <button onClick={SignIn} className='rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-3 items-center justify-center' >
+                        {/* <BsPersonCircle className="w-7 h-7 text-white" /> */}
+                        <span className='text-sm text-[#006666] font-extrabold' > Login</span>
                     </button>
                     :
                     <>
 
                         <DropdownMenu>
-                            <DropdownMenuTrigger className='bg-[#006666] p-2 rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-2 items-center justify-center' >
+                            <DropdownMenuTrigger className='rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-2 items-center justify-center' >
                                 <Avatar className='border-1 border-white' >
                                     <AvatarImage src={user?.photoURL || undefined} />
                                     {
                                         name != undefined
                                         &&
-                                        <AvatarFallback>{name.charAt(0) + name.charAt(1).toLocaleUpperCase()}</AvatarFallback>
+                                        <AvatarFallback className='text-black' >{name.charAt(0) + name.charAt(1).toLocaleUpperCase()}</AvatarFallback>
                                     }
                                 </Avatar>
-                                <span className='text-sm text-white font-extrabold' >{user.displayName}</span>
+                                <span className='text-sm text-[#006666] font-extrabold' >{user.displayName}</span>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className='w-[300px] min-h-[200px] mr-5 mt-5 p-5 bg-[#dfdfdf] border-2 border-white' >
+                            <DropdownMenuContent className='w-[300px] min-h-[200px] mr-5 mt-5 p-5 bg-[#ffff] border-2 border-[#dfdfdf]' >
 
                                 <DropdownMenuLabel className='flex justify-center' >
                                     <Avatar className='border-1 border-white w-20 h-20' >
@@ -92,7 +92,7 @@ function SignIn() {
                                 <DropdownMenuLabel className='text-center' >{user.displayName}</DropdownMenuLabel>
                                 <DropdownMenuLabel className='text-center text-xs m-0 pt-0 pb-5' >{user.email}</DropdownMenuLabel>
 
-                                <DropdownMenuSeparator className='bg-white' />
+                                <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
                                 <div className='py-5' >
                                     <DropdownMenuItem>Meu Perfil</DropdownMenuItem>
@@ -102,7 +102,7 @@ function SignIn() {
                                     </DropdownMenuItem>
                                 </div>
 
-                                <DropdownMenuSeparator className='bg-white' />
+                                <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
                                 <DropdownMenuItem onClick={SignOut} className='focus:bg-[#a91006] focus:text-white flex justify-center bg-[#a91006] text-white font-extrabold mt-5 cursor-pointer hover:bg-[#a91006] hover:scale-[1.02] duration-200' >Sair</DropdownMenuItem>
 
