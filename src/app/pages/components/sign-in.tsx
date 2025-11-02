@@ -80,7 +80,7 @@ function SignIn() {
                             <DropdownMenuContent className='w-[300px] min-h-[200px] mr-5 mt-5 p-5 bg-[#ffff] border-2 border-[#dfdfdf]' >
 
                                 <DropdownMenuLabel className='flex justify-center' >
-                                    <Avatar className='border-1 border-white w-20 h-20' >
+                                    <Avatar className='border-1 border-white w-30 h-30' >
                                         <AvatarImage src={user?.photoURL || undefined} />
                                         {
                                             name != undefined
