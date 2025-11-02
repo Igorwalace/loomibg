@@ -2135,6 +2135,14 @@ caniuse-lite@^1.0.30001741:
   version "1.0.30001743"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001743.tgz#50ff91a991220a1ee2df5af00650dd5c308ea7cd"
 
+card@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/card/-/card-2.5.4.tgz#5dc535022abd0b3d08a5c4e43d68b45617d4134c"
+  dependencies:
+    node.extend "~2.0.2"
+    payment "^2.4.6"
+    qj "^2.0.0"
+
 chalk@^4.0.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
@@ -3507,7 +3515,7 @@ has@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/has/-/has-1.0.4.tgz#2eb2860e000011dae4f1406a86fe80e530fb2ec6"
 
-hasown@^2.0.2:
+hasown@^2.0.0, hasown@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/hasown/-/hasown-2.0.2.tgz#003eaf91be7adc372e84ec59dc37252cedb80003"
   dependencies:
@@ -3823,6 +3831,10 @@ is-weakset@^2.0.3:
   dependencies:
     call-bound "^1.0.3"
     get-intrinsic "^1.2.6"
+
+is@^3.3.0:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/is/-/is-3.3.2.tgz#dfc285f4937f08564675f2f17cc6ac6cd2113ace"
 
 isarray@0.0.1:
   version "0.0.1"
@@ -4293,6 +4305,13 @@ node-releases@^2.0.21:
   version "2.0.21"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.21.tgz#f59b018bc0048044be2d4c4c04e4c8b18160894c"
 
+node.extend@~2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/node.extend/-/node.extend-2.0.3.tgz#01cff7d142996aee6bb6bf506d065405ecd4371d"
+  dependencies:
+    hasown "^2.0.0"
+    is "^3.3.0"
+
 nopt@^2.0.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-2.2.1.tgz#2aa09b7d1768487b3b89a9c5aa52335bff0baea7"
@@ -4529,6 +4548,13 @@ path-to-regexp@^8.0.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-8.3.0.tgz#aa818a6981f99321003a08987d3cec9c3474cd1f"
 
+payment@^2.4.6:
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/payment/-/payment-2.4.7.tgz#fabefae499050f159e2a6837a58d30b78789f91c"
+  dependencies:
+    globalthis "^1.0.4"
+    qj "~2.0.0"
+
 picocolors@^1.0.0, picocolors@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.1.1.tgz#3d321af3eab939b083c8f929a1d12cda81c26b6b"
@@ -4647,6 +4673,10 @@ proxy-addr@^2.0.7:
 punycode@^2.1.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.1.tgz#027422e2faec0b25e1549c3e1bd8309b9133b6e5"
+
+qj@^2.0.0, qj@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/qj/-/qj-2.0.0.tgz#054dd3b75ce018728d23a0605f030dfda0bd158a"
 
 qs@^6.14.0:
   version "6.14.0"

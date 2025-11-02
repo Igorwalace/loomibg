@@ -17,8 +17,7 @@ import { auth } from '@/app/utils/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 // reacticons
-import { BsPersonCircle } from "react-icons/bs";
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 // context
 import useAppUtils from '@/app/context/utils';
@@ -29,6 +28,8 @@ function SignIn() {
     const { SignIn } = useAppUtils()
 
     const [name, setName] = useState<string | null>(null)
+
+    const pathname = usePathname();
     const user = auth.currentUser;
 
     const router = useRouter()
@@ -95,10 +96,20 @@ function SignIn() {
                                 <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
                                 <div className='py-5' >
-                                    <DropdownMenuItem>Meu Perfil</DropdownMenuItem>
-                                    <DropdownMenuItem>Meus Salvos</DropdownMenuItem>
                                     <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                        <Link href='/my-image' >Minhas imagens</Link>
+                                        <Link href='/rbg' className={`${pathname === '/rbg' && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >Remover Fundo</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                        <Link href={'/text-to-img'} className={`${pathname.includes('text-to-img') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >Transformar Texto p/ Imagem</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                        <Link href={'/remove-text-img'} className={`${pathname.includes('remove') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>Remover Texto da Imagem</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                        <Link href='/my-image' className={`${pathname.includes('my-image') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>Uploads</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                        <Link href={'/'}>Mais</Link>
                                     </DropdownMenuItem>
                                 </div>
 
