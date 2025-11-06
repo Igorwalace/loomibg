@@ -121,7 +121,7 @@ function DialogRemoveBg() {
 
             <Dialog onOpenChange={setDialogRemoveBg} open={dialogRemoveBg}>
                 <DialogContent
-                    className='w-[100%] md:w-[90%] bg-[#dfdfdf] border-2 max-h-[80vh] border-white overflow-y-auto'
+                    className='w-[100%] md:w-[90%] bg-[#dfdfdf] border-2 lg:max-h-[90vh] max-h-[80vh] border-white overflow-y-auto'
                     onInteractOutside={(e) => e.preventDefault()}
                     onEscapeKeyDown={(e) => e.preventDefault()}
                 >
@@ -191,7 +191,7 @@ function DialogRemoveBg() {
                                         key={textGerention}
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
-                                        transition={{ duration: 1 }}
+                                        transition={{ duration: 0.5 }}
                                         className='text-sm font-extrabold' >{textGerention}</motion.span>
                                 </div>
                             }
