@@ -12,7 +12,7 @@ export function ShowcaseSection() {
                     </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 justify-items-center">
+                <div className="grid gap-6 md:grid-cols-2 justify-items-center p-5">
                     <Card className="overflow-hidden border-2 border-dashed border-border flex items-center justify-center bg-[#0A1222] px-6">
                         <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 w-[350px] h-[350px] rounded-xl">
                             <img
