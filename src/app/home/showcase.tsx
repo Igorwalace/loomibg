@@ -13,7 +13,7 @@ export function ShowcaseSection() {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 justify-items-center">
-                    <Card className="overflow-hidden border-border flex items-center justify-center bg-[#0A1222] px-6">
+                    <Card className="overflow-hidden border-2 border-dashed border-border flex items-center justify-center bg-[#0A1222] px-6">
                         <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 w-[350px] h-[350px] rounded-xl">
                             <img
                                 src="/cadeira.png"
@@ -30,7 +30,7 @@ export function ShowcaseSection() {
                         </div>
                     </Card>
 
-                    <Card className="overflow-hidden border-border flex items-center justify-center bg-[#0A1222] px-6">
+                    <Card className="overflow-hidden border-2 border-dashed border-muted flex items-center justify-center bg-[#0A1222] px-6">
                         <div className="w-[350px] h-[350px]">
                             <img
                                 src="/cachorro-na-lua.png"
