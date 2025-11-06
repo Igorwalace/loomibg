@@ -121,7 +121,7 @@ function DialogRemoveBg() {
 
             <Dialog onOpenChange={setDialogRemoveBg} open={dialogRemoveBg}>
                 <DialogContent
-                    className='w-[100%] md:w-[90%] bg-[#dfdfdf] border-2 max-h-[90vh] border-white overflow-y-auto'
+                    className='w-[100%] md:w-[90%] bg-[#dfdfdf] border-2 max-h-[80vh] border-white overflow-y-auto'
                     onInteractOutside={(e) => e.preventDefault()}
                     onEscapeKeyDown={(e) => e.preventDefault()}
                 >
@@ -149,10 +149,13 @@ function DialogRemoveBg() {
                             </Popover>
                         </DialogTitle>
                         <Separator className='bg-white' />
-                        <div className={`${loading ? 'justify-between' : 'justify-center'} flex md:flex-row flex-col gap-2 w-full items-center py-3`} >
+                        <div className={`${loading ? 'justify-between' : 'justify-center'} flex md:flex-row flex-col-reverse gap-2 w-full items-center py-3`} >
 
                             {/* imagem do user */}
-                            <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white">
+                            {
+                                !loading 
+                                &&
+                                <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white">
                                 <Image
                                     className={`rounded-2xl ${!check ? 'object-contain p-2' : "object-cover"} border-2 border-white`}
                                     src={file && URL.createObjectURL(file)}
@@ -160,6 +163,7 @@ function DialogRemoveBg() {
                                     alt="A imagem que você enviou."
                                 />
                             </div>
+                            }
 
                             {/* imagem editada */}
                             {
@@ -181,7 +185,7 @@ function DialogRemoveBg() {
                             {
                                 loading
                                 &&
-                                <div className="relative w-2/4 min-h-[400px] flex items-center justify-center flex-col gap-5 rounded-2xl bg-white">
+                                <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white flex items-center justify-center flex-col gap-5">
                                     <span className="loader"></span>
                                     <motion.span
                                         key={textGerention}
