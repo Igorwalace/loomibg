@@ -1,5 +1,6 @@
 import React from 'react'
 import Home from './home/page'
+import { Footer } from './home/footer'
 
 //pages
 // import Upload from './components/upload'

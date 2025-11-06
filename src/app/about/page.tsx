@@ -1,16 +1,15 @@
 import React from 'react'
 import Header from '../pages/header'
-import TextToImagePage from './TextToImagePage'
 import { Footer } from '../home/footer'
 
-function TextToImg() {
+function Home() {
   return (
     <>
       <Header />
-      <TextToImagePage />
+      <div className='w-full text-center p-5 h-[80vh]' >EM BREVE</div>
       <Footer />
     </>
   )
 }
 
-export default TextToImg
+export default Home

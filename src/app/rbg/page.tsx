@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../pages/header'
 import RemoveBG from './remove-bg'
+import { Footer } from '../home/footer'
 
 function RBG() {
     return (
@@ -17,6 +18,7 @@ function RBG() {
                         <RemoveBG />
                     </div>
                 </div>
+                <Footer />
             </main>
         </>
     )

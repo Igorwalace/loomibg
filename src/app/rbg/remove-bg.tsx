@@ -59,7 +59,7 @@ function RemoveBG() {
 
     return (
         <>
-            <div className='relative w-[640px] h-[420px]'>
+            <div className='relative lg:w-[60%] md:w-[70%] w-[95%] h-[420px]'>
                 <DialogLogin />
                 <DialogRemoveBg />
                 <Image
