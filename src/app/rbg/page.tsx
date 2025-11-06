@@ -8,12 +8,12 @@ function RBG() {
         <>
             <main className='' >
                 <Header />
-                <div>
-                    <div className='text-center p-5' >
+                <div className='' >
+                    <div className='text-center p-5 bg-muted rounded-2xl' >
                         <h1 className='mb-4 text-balance text-4xl font-bold text-foreground md:text-5xl' >Removedor de Fundo</h1>
                         <h2 className='text-pretty text-lg leading-relaxed text-muted-foreground' >Apague fundos de diferentes imagens de sua escolha gratuitamente.</h2>
                     </div>
-                    <div className='p-5 flex justify-center items-center' >
+                    <div className='p-- flex justify-center items-center bg-muted rounded-2xl' >
                         {/* brincadeira começa aqui */}
                         <RemoveBG />
                     </div>

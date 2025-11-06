@@ -4,7 +4,7 @@ import { FaInstagram } from "react-icons/fa6";
 
 export function Footer() {
     return (
-        <footer className="border-t bg-background">
+        <footer className="border-t bg-background rounded-2xl">
             <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                     {/* Company Info */}
@@ -41,7 +41,7 @@ export function Footer() {
                     </div>
 
                     {/* Resources */}
-                    <div className="space-y-3">
+                    {/* <div className="space-y-3">
                         <h3 className="text-lg font-semibold">Recursos</h3>
                         <ul className="space-y-2 text-sm">
                             <li>
@@ -60,7 +60,7 @@ export function Footer() {
                                 </Link>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     {/* Legal */}
                     <div className="space-y-3">
@@ -83,9 +83,9 @@ export function Footer() {
                 {/* Bottom Bar */}
                 <div className="mt-8 border-t pt-6 flex flex-col items-center justify-between gap-4 md:flex-row">
                     <p className="text-sm text-muted-foreground">
-                        © {new Date().getFullYear()} Loomibg. Todos os direitos reservados.
+                        © {new Date().getFullYear()} Loomibg.
                     </p>
-                    <div className="flex gap-4">
+                    {/* <div className="flex gap-4">
                         <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
                             <span className="sr-only">instagram</span>
                             <FaInstagram size='20' />
@@ -110,7 +110,7 @@ export function Footer() {
                                 />
                             </svg>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>

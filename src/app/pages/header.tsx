@@ -14,14 +14,14 @@ import LinksHeader from './components/_links-header'
 function Header() {
   return (
     <>
-      <div className='px-5 py-3 flex items-center justify-between bg-[]' >
+      <div className='px-5 py-3 flex items-center justify-between bg-[] rounded-2xl' >
         <Link href={'/'} id='logo' className={`${caveat.className} text-4xl font-extrabold text-[#006666]`} >Loomibg</Link>
 
         <LinksHeader />
 
         <SignIn />
       </div>
-      <Separator />
+      {/* <Separator className='rounded-b-2xl' /> */}
     </>
   )
 }
