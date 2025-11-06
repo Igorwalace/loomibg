@@ -121,7 +121,7 @@ function DialogRemoveBg() {
 
             <Dialog onOpenChange={setDialogRemoveBg} open={dialogRemoveBg}>
                 <DialogContent
-                    className='w-[100%] md:w-[70%] bg-[#dfdfdf] border-2 border-white'
+                    className='w-[100%] md:w-[90%] bg-[#dfdfdf] border-2 max-h-[90vh] border-white overflow-y-auto'
                     onInteractOutside={(e) => e.preventDefault()}
                     onEscapeKeyDown={(e) => e.preventDefault()}
                 >
@@ -149,10 +149,10 @@ function DialogRemoveBg() {
                             </Popover>
                         </DialogTitle>
                         <Separator className='bg-white' />
-                        <div className={`${loading ? 'justify-between' : 'justify-center'} flex gap-2 w-full items-center py-3`} >
+                        <div className={`${loading ? 'justify-between' : 'justify-center'} flex md:flex-row flex-col gap-2 w-full items-center py-3`} >
 
                             {/* imagem do user */}
-                            <div className="relative w-2/4 min-h-[400px] bg-white rounded-2xl p-5">
+                            <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white">
                                 <Image
                                     className={`rounded-2xl ${!check ? 'object-contain p-2' : "object-cover"} border-2 border-white`}
                                     src={file && URL.createObjectURL(file)}
@@ -165,7 +165,7 @@ function DialogRemoveBg() {
                             {
                                 fileEdit
                                 &&
-                                <div className="relative w-2/4 min-h-[400px] bg-white rounded-2xl">
+                                <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white">
                                     <Image
                                         className={`rounded-2xl ${!check ? 'object-contain p-2' : "object-cover"} opacity-0 duration-3000 border-2 border-white`}
                                         src={fileEdit}
@@ -196,11 +196,11 @@ function DialogRemoveBg() {
                         {
                             !fileEdit
                                 ?
-                                <div className='flex gap-2 pt-3' >
+                                <div className='flex flex-col md:flex-row gap-2 pt-3' >
                                     <button
                                         onClick={RemoveBG}
                                         disabled={loading}
-                                        className={`${loading && 'w-full durantion-200 hover:scale-[1]'} bg-[#006666] text-white cursor-pointer hover:scale-[1.01] w-2/4 rounded-md font-extrabold px-4 py-2 duration-200`}
+                                        className={`${loading && 'w-full durantion-200 hover:scale-[1] bg-[#ccc]'} bg-[#006666] text-white cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md font-extrabold px-4 py-2 duration-200`}
                                     >
                                         {
                                             !loading
@@ -216,16 +216,16 @@ function DialogRemoveBg() {
                                             setDialogRemoveBg(false)
                                         }}
                                         disabled={loading}
-                                        className={`${loading && 'hidden'} bg-white text-black cursor-pointer hover:scale-[1.01] w-2/4 rounded-md font-extrabold px-4 py-2 duration-200`}
+                                        className={`${loading && 'hidden'} bg-white text-black cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md font-extrabold px-4 py-2 duration-200`}
                                     >
                                         Cancelar
                                     </button>
                                 </div>
                                 :
-                                <div className='flex gap-2 pt-3' >
+                                <div className='flex flex-col md:flex-row gap-2 pt-3' >
                                     <button
                                         onClick={handleDownload}
-                                        className={`bg-[#006666] cursor-pointer hover:scale-[1.01] w-2/4 rounded-md text-white px-4 py-2 duration-200`}
+                                        className={`bg-[#006666] cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md text-white px-4 py-2 duration-200`}
                                     >
                                         Download
                                     </button>
@@ -235,7 +235,7 @@ function DialogRemoveBg() {
                                             setDialogRemoveBg(false)
                                         }}
                                         disabled={loading}
-                                        className={`bg-white cursor-pointer hover:scale-[1.01] w-2/4 rounded-md text-black font-extrabold px-4 py-2 duration-200`}
+                                        className={`bg-white cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md text-black font-extrabold px-4 py-2 duration-200`}
                                     >
                                         Fechar
                                     </button>

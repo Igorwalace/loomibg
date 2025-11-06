@@ -96,21 +96,31 @@ function SignIn() {
                                 <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
                                 <div className='py-5' >
-                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                        <Link href='/rbg' className={`${pathname === '/rbg' && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >Remover Fundo</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                        <Link href={'/text-to-img'} className={`${pathname.includes('text-to-img') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >Transformar Texto p/ Imagem</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                        <Link href={'/remove-text-img'} className={`${pathname.includes('remove') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>Remover Texto da Imagem</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                        <Link href='/my-image' className={`${pathname.includes('my-image') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>Uploads</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                        <Link href={'/'}>Mais</Link>
-                                    </DropdownMenuItem>
+                                    <Link href='/rbg' className={`${pathname === '/rbg' && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Remover Fundo
+                                        </DropdownMenuItem>
+                                    </Link>
+                                    <Link href={'/text-to-img'} className={`${pathname.includes('text-to-img') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Transformar Texto p/ Imagem
+                                        </DropdownMenuItem>
+                                    </Link>
+                                    <Link href={'/remove-text-img'} className={`${pathname.includes('remove') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Remover Texto da Imagem
+                                        </DropdownMenuItem>
+                                    </Link>
+                                    <Link href='/my-image' className={`${pathname.includes('my-image') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Uploads
+                                        </DropdownMenuItem>
+                                    </Link>
+                                    <Link href={'/'}>
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Mais
+                                        </DropdownMenuItem>
+                                    </Link>
                                 </div>
 
                                 <DropdownMenuSeparator className='border-[#dfdfdf]' />

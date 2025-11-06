@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCe3Qp4V1A3rQgoN9HSmo076GfeFN3-SPg",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_KEY,
   authDomain: "loomibg.firebaseapp.com",
   projectId: "loomibg",
   storageBucket: "loomibg.firebasestorage.app",
-  messagingSenderId: "613459559411",
-  appId: "1:613459559411:web:a54a6dd4736e681c994886"
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID
 };
 
 export const app = initializeApp(firebaseConfig);
