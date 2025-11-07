@@ -12,16 +12,16 @@ export function ShowcaseSection() {
                     </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 justify-items-center p-5">
-                    <Card className="overflow-hidden border-2 border-dashed border-border flex items-center justify-center bg-[#0A1222] px-6">
-                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 w-[350px] h-[350px] rounded-xl">
+                <div className="grid gap-6 md:grid-cols-2 justify-items-center">
+                    <Card className="overflow-hidden border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
+                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 max-w-[350px] h-[350px] rounded-xl">
                             <img
                                 src="/cadeira.png"
                                 alt="Background removal example"
                                 className="h-full w-full object-cover"
                             />
                         </div>
-                        <Separator className="" />
+                        <Separator className="bg-muted-foreground" />
                         <div className="py-3">
                             <h3 className="mb-2 text-xl font-semibold text-white">Remoção de fundo</h3>
                             <p className="leading-relaxed text-muted-foreground">
@@ -30,15 +30,15 @@ export function ShowcaseSection() {
                         </div>
                     </Card>
 
-                    <Card className="overflow-hidden border-2 border-dashed border-muted flex items-center justify-center bg-[#0A1222] px-6">
-                        <div className="w-[350px] h-[350px]">
+                    <Card className="overflow-hidden border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
+                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 max-w-[350px] h-[350px] rounded-xl">
                             <img
                                 src="/cachorro-na-lua.png"
                                 alt="Text to imagem exemple"
                                 className="h-full w-full object-cover rounded-xl"
                             />
                         </div>
-                        <Separator className="" />
+                        <Separator className="bg-muted-foreground" />
                         <div className="py-3">
                             <h3 className="mb-2 text-xl font-semibold text-white">Texto para imagens</h3>
                             <p className="leading-relaxed text-muted-foreground">
