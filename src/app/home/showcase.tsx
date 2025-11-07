@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import Image from "next/image"
 
 export function ShowcaseSection() {
     return (
@@ -14,11 +15,12 @@ export function ShowcaseSection() {
 
                 <div className="grid gap-6 md:grid-cols-2 justify-items-center">
                     <Card className="overflow-hidden md:border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
-                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 w-[90%] rounded-xl max-h-[350px]">
-                            <img
+                        <div className="relative w-[90%] rounded-xl min-h-[350px] bg-gradient-to-br from-accent/20 to-accent/5">
+                            <Image
                                 src="/cadeira.png"
+                                fill
                                 alt="Background removal example"
-                                className="h-full w-full object-cover"
+                                className="object-contain"
                             />
                         </div>
                         <Separator className="bg-muted-foreground" />
@@ -30,11 +32,13 @@ export function ShowcaseSection() {
                         </div>
                     </Card>
                     <Card className="overflow-hidden md:border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
-                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 w-[90%] rounded-xl max-h-[350px]">
-                            <img
+                        <div className="relative w-[90%] min-h-[350px] rounded-2xl">
+                            <Image
                                 src="/cachorro-na-lua.png"
+                                fill
+                                quality={100}
                                 alt="Background removal example"
-                                className="h-full w-full object-cover rounded-2xl"
+                                className="sm:object-contain object-cover rounded-2xl"
                             />
                         </div>
                         <Separator className="bg-muted-foreground" />
