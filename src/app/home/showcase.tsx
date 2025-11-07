@@ -13,8 +13,8 @@ export function ShowcaseSection() {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 justify-items-center">
-                    <Card className="overflow-hidden border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
-                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 max-w-[350px] h-[350px] rounded-xl">
+                    <Card className="overflow-hidden md:border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
+                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 w-[90%] rounded-xl max-h-[350px]">
                             <img
                                 src="/cadeira.png"
                                 alt="Background removal example"
@@ -29,13 +29,12 @@ export function ShowcaseSection() {
                             </p>
                         </div>
                     </Card>
-
-                    <Card className="overflow-hidden border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
-                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 max-w-[350px] h-[350px] rounded-xl">
+                    <Card className="overflow-hidden md:border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
+                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-accent/5 w-[90%] rounded-xl max-h-[350px]">
                             <img
                                 src="/cachorro-na-lua.png"
-                                alt="Text to imagem exemple"
-                                className="h-full w-full object-cover rounded-xl"
+                                alt="Background removal example"
+                                className="h-full w-full object-cover rounded-2xl"
                             />
                         </div>
                         <Separator className="bg-muted-foreground" />
