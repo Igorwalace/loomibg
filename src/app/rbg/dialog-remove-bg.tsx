@@ -32,6 +32,9 @@ import { API_KEY, CLICKDROP_URL_REMOVE_BG, messages, phrases } from '../utils/ts
 
 // framer motion
 import { motion } from "framer-motion";
+import { handleDownload } from './download';
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
 
 function DialogRemoveBg() {
 
@@ -43,6 +46,7 @@ function DialogRemoveBg() {
     const [check, setCheck] = useState(false)
     const [textGerention, setTextGerantion] = useState<string>('')
     const [phrase, setPhrase] = useState('')
+    const [hiddenCard, setHiddenCard] = useState(false)
 
     useEffect(() => {
         if (!loading) return
@@ -99,6 +103,8 @@ function DialogRemoveBg() {
                 newFile
             );
             const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE, result.$id)
+
+            setHiddenCard(true)
             setFileEdit(GetUrlFilePublic)
             setLoading(false)
 
@@ -106,70 +112,75 @@ function DialogRemoveBg() {
             console.log(error)
         }
     }
-
-    const handleDownload = () => {
-        const link = document.createElement("a");
-        link.href = fileEdit;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.click();
-    };
-
-
     return (
         <>
 
             <Dialog onOpenChange={setDialogRemoveBg} open={dialogRemoveBg}>
                 <DialogContent
-                    className='w-[100%] md:w-[90%] bg-[#dfdfdf] border-2 lg:max-h-[90vh] max-h-[80vh] border-white overflow-y-auto'
+                    className='w-[100%] md:w-[50%] bg-[#dfdfdf] border-2 lg:max-h-[90vh] max-h-[80vh] border-white overflow-y-auto'
                     onInteractOutside={(e) => e.preventDefault()}
                     onEscapeKeyDown={(e) => e.preventDefault()}
                 >
                     <DialogHeader>
-                        <DialogTitle className='text-center pb-3 flex justify-center gap-2 items-center'
+                        <DialogTitle className='text-center pb-3 flex justify-between items-center'
                         >
-                            <motion.span
-                            >
-                                {phrase}
-                            </motion.span>
-                            <Popover>
-                                <PopoverTrigger className='cursor-pointer' >
-                                    <BsInfoCircle />
-                                </PopoverTrigger>
-                                <PopoverContent className="text-sm">
-                                    <label className="flex items-center justify-center gap-3 cursor-pointer">
-                                        <Checkbox
-                                            checked={check}
-                                            onCheckedChange={() => { setCheck(!check) }}
-                                        />
-                                        <span>Mostrar foto completa? (sem cortes)</span>
-                                    </label>
-                                </PopoverContent>
+                            <div className='flex justify-center gap-2 items-center' >
+                                <motion.span
+                                >
+                                    Sua imagem
+                                </motion.span>
+                                <Popover>
+                                    <PopoverTrigger className='cursor-pointer' >
+                                        <BsInfoCircle />
+                                    </PopoverTrigger>
+                                    <PopoverContent className="text-sm">
+                                        <label className="flex items-center justify-center gap-3 cursor-pointer">
+                                            <Checkbox
+                                                checked={check}
+                                                onCheckedChange={() => { setCheck(!check) }}
+                                            />
+                                            <span>Mostrar foto completa? (sem cortes)</span>
+                                        </label>
+                                    </PopoverContent>
 
-                            </Popover>
+                                </Popover>
+                            </div>
+                            {
+                                fileEdit
+                                &&
+                                <Button variant="outline" size="sm" className="hover:scale-[1.04]"
+                                    onClick={() => {
+                                        handleDownload(fileEdit)
+                                    }}
+                                >
+                                    <Download className="w-4 h-4 mr-2" />
+                                    Download
+                                </Button>
+                            }
                         </DialogTitle>
+
                         <Separator className='bg-white' />
                         <div className={`${loading ? 'justify-between' : 'justify-center'} flex md:flex-row flex-col-reverse gap-2 w-full items-center py-3`} >
 
                             {/* imagem do user */}
                             {
-                                !loading 
+                                !loading
                                 &&
-                                <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white">
-                                <Image
-                                    className={`rounded-2xl ${!check ? 'object-contain p-2' : "object-cover"} border-2 border-white`}
-                                    src={file && URL.createObjectURL(file)}
-                                    fill
-                                    alt="A imagem que você enviou."
-                                />
-                            </div>
+                                <div className={`${hiddenCard && 'hidden'} relative w-full min-h-[400px] rounded-2xl bg-white`}>
+                                    <Image
+                                        className={`rounded-2xl ${!check ? 'object-contain p-2' : "object-cover"} border-2 border-white`}
+                                        src={file && URL.createObjectURL(file)}
+                                        fill
+                                        alt="A imagem que você enviou."
+                                    />
+                                </div>
                             }
 
                             {/* imagem editada */}
                             {
                                 fileEdit
                                 &&
-                                <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white">
+                                <div className={`${!hiddenCard && 'hidden'} relative w-full min-h-[400px] rounded-2xl bg-muted`}>
                                     <Image
                                         className={`rounded-2xl ${!check ? 'object-contain p-2' : "object-cover"} opacity-0 duration-3000 border-2 border-white`}
                                         src={fileEdit}
@@ -185,7 +196,7 @@ function DialogRemoveBg() {
                             {
                                 loading
                                 &&
-                                <div className="relative md:w-2/4 w-full min-h-[400px] rounded-2xl bg-white flex items-center justify-center flex-col gap-5">
+                                <div className="relative w-full min-h-[400px] rounded-2xl bg-white flex items-center justify-center flex-col gap-5">
                                     <span className="loader"></span>
                                     <motion.span
                                         key={textGerention}
@@ -195,6 +206,7 @@ function DialogRemoveBg() {
                                         className='text-sm font-extrabold' >{textGerention}</motion.span>
                                 </div>
                             }
+
                         </div>
                         <Separator className='bg-white' />
                         {
@@ -209,7 +221,7 @@ function DialogRemoveBg() {
                                         {
                                             !loading
                                                 ?
-                                                'Gerar Imagem'
+                                                'Remover fundo'
                                                 :
                                                 'Loading'
                                         }
@@ -228,20 +240,15 @@ function DialogRemoveBg() {
                                 :
                                 <div className='flex flex-col md:flex-row gap-2 pt-3' >
                                     <button
-                                        onClick={handleDownload}
-                                        className={`bg-[#006666] cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md text-white px-4 py-2 duration-200`}
-                                    >
-                                        Download
-                                    </button>
-                                    <button
                                         onClick={() => {
-                                            setFileEdit(undefined)
                                             setDialogRemoveBg(false)
+                                            setFileEdit(undefined)
+                                            setHiddenCard(false)
                                         }}
                                         disabled={loading}
-                                        className={`bg-white cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md text-black font-extrabold px-4 py-2 duration-200`}
+                                        className={`bg-[#006666] cursor-pointer hover:scale-[1.01] w-full rounded-md text-white font-extrabold px-4 py-2 duration-200`}
                                     >
-                                        Fechar
+                                        Remover novo fundo
                                     </button>
                                 </div>
                         }

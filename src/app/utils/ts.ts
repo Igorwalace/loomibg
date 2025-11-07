@@ -22,4 +22,6 @@ export const phrases = [
 
 export const API_KEY = process.env.NEXT_PUBLIC_CLICKDROP_API_KEY
 export const CLICKDROP_URL_REMOVE_BG = process.env.NEXT_PUBLIC_CLICKDROP_URL_REMOVE_BG
+export const CLICKDROP_URL_TEXT_TO_IMAGE = process.env.NEXT_PUBLIC_CLICKDROP_URL_TEXT_TO_IMAGE
+
 export const PROJECT_ID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID

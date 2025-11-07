@@ -34,7 +34,7 @@ export function ShowcaseSection() {
                     <Card className="overflow-hidden md:border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
                         <div className="relative w-[90%] min-h-[350px] rounded-2xl">
                             <Image
-                                src="/cachorro-na-lua.png"
+                                src="/cidade.png"
                                 fill
                                 quality={100}
                                 alt="Background removal example"
