@@ -4,6 +4,7 @@ import { HeroSection } from './hero'
 import { FeaturesSection } from './features-section'
 import { Footer } from './footer'
 import { ShowcaseSection } from './showcase'
+import FeaturesRemoveText from './features-remove-text'
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <HeroSection />
       <FeaturesSection />
       <ShowcaseSection />
+      <FeaturesRemoveText />
       <Footer />
     </>
   )

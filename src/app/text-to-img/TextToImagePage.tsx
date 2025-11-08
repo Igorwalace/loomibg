@@ -29,6 +29,10 @@ export default function TextToImagePage() {
             setDialogNoLogin(true)
             return
         }
+        if (prompt === '') {
+            alert('Digite uma descrição.')
+            return
+        }
 
         const form = new FormData()
         form.append('prompt', prompt)
