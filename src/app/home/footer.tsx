@@ -67,13 +67,8 @@ export function Footer() {
                         <h3 className="text-lg font-semibold">Importante</h3>
                         <ul className="space-y-2 text-sm">
                             <li>
-                                <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-                                    Política de Privacidade
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-                                    Termos de Serviço
+                                <Link target="_blank" href="https://tor.cloud.appwrite.io/v1/storage/buckets/69069613000fe50c3955/files/690f7939003b7e96868d/view?project=69069541002417c94a88&mode=admin" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    Política de Privacidade e Termos de Serviço
                                 </Link>
                             </li>
                         </ul>
