@@ -1,15 +1,99 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Loader2, Upload, X } from 'lucide-react'
-import React from 'react'
+import { User } from 'firebase/auth'
+import { Download, Loader2, Sparkles, Upload, X } from 'lucide-react'
+import React, { useRef, useState } from 'react'
+import useAppUtils from '../context/utils'
+import useAppRemoveBg from '../context/remove-bg'
+import { API_KEY, CLICKDROP_URL_REMOVE_TEXT } from '../utils/ts'
+import { BUCKET_ID_IMAGE } from '../components/upload'
+import { storage } from '../utils/appwrite'
+import { ID } from 'appwrite'
+import { auth } from '../utils/firebase'
+import Image from 'next/image'
+import { handleDownload } from '../rbg/download'
 
 function RemovetextImg() {
+
+    const { setDialogNoLogin, setLoading, loading } = useAppUtils()
+    const { setFile, file, setFileEdit, fileEdit } = useAppRemoveBg()
+
+    const inputRef = useRef<HTMLInputElement | null>(null)
+
+    const user = auth.currentUser
+
+    const handleImageUpload = () => {
+        setFile(undefined)
+        if (user === null) {
+            setDialogNoLogin(true)
+            return
+        }
+        inputRef.current?.click()
+    }
+    const ObterImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const maxSize = 30 * 1024 * 1024; // 30MB
+        const FILE = e.target.files?.[0]
+        if (FILE!.size > maxSize) {
+            alert("A imagem deve ter no máximo 30MB.");
+            e.target.value = "";
+            return;
+        }
+        setFile(FILE)
+        e.target.value = "";
+    }
+    const handleRemoveText = async () => {
+        const form = new FormData();
+        form.append("image_file", file);
+
+        try {
+            setLoading(true)
+            if (!CLICKDROP_URL_REMOVE_TEXT) return
+            const response = await fetch(CLICKDROP_URL_REMOVE_TEXT, {
+                method: 'POST',
+                headers: {
+                    'x-api-key': API_KEY!,
+                },
+                body: form,
+            })
+            const buffer = await response.arrayBuffer();
+            const blob = new Blob([buffer], { type: "image/png" });
+
+            const newFile = new File([blob], `${user?.uid}/${user?.uid}.png`, { type: "image/png" });
+
+            if (!BUCKET_ID_IMAGE) return
+            const result = await storage.createFile(
+                BUCKET_ID_IMAGE,
+                ID.unique(),
+                newFile
+            );
+            const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE, result.$id)
+
+            // setHiddenCard(true)
+            setFileEdit(GetUrlFilePublic)
+            setLoading(false)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const handleNewImage = () => {
+        setFileEdit(undefined)
+        setLoading(false)
+        setFile(undefined)
+    }
+
     return (
-        <main className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-background">
-            <div className="container mx-auto px-4 py-12">
+        <main className="min-h-screen bg-muted">
+            <div className="container mx-auto px-4 py-10">
                 <div className="max-w-5xl mx-auto">
+
                     {/* Header */}
                     <div className="text-center mb-12">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
+                            <Sparkles className="w-8 h-8 text-[#006666]" />
+                        </div>
                         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Remoção de texto por IA</h1>
                         <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
                             Faça o upload de uma imagem e deixe a IA detectar e remover o texto automaticamente, deixando a imagem limpa.
@@ -17,76 +101,97 @@ function RemovetextImg() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
-                        {/* Upload Section */}
                         <Card className="p-6">
-                            <h2 className="text-xl font-semibold mb-4">Imagem original</h2>
-
-                            {/* {!selectedImage ? ( */}
-                                <label className="flex flex-col items-center justify-center w-full h-80 border-2 border-dashed border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
-                                    <div className="flex flex-col items-center justify-center gap-4">
-                                        <Upload className="w-12 h-12 text-muted-foreground" />
-                                        <div className="text-center">
-                                            <p className="text-sm font-medium">Click to upload image</p>
-                                            <p className="text-xs text-muted-foreground mt-1">PNG, JPG, WEBP up to 10MB</p>
-                                        </div>
+                            <div className='grid grid-cols-2' >
+                                <h2 className="text-xl font-semibold mb-4">Imagem original</h2>
+                                {
+                                    file
+                                    &&
+                                    <Button disabled={loading} variant="outline" size="sm" className="hover:scale-[1.04]"
+                                        onClick={handleNewImage}
+                                    >
+                                        {/* <Download className="w-4 h-4 mr-2" /> */}
+                                        Nova imagem
+                                    </Button>
+                                }
+                            </div>
+                            {
+                                file
+                                    ?
+                                    <div className="relative w-[400px] h-[300px]">
+                                        <Image
+                                            src={file && URL.createObjectURL(file)}
+                                            alt="Imagem Original"
+                                            fill
+                                            className="w-full h-80 object-contain rounded-lg bg-muted p-2"
+                                        />
                                     </div>
-                                    <input type="file" className="hidden" accept="image/*" />
-                                </label>
-                            {/* ) : ( */}
-                                <div className="relative">
-                                    <img
-                                        src={"/cidade.png"}
-                                        alt="Original"
-                                        className="w-full h-80 object-contain rounded-lg bg-muted"
-                                    />
-                                    <Button size="icon" variant="destructive" className="absolute top-2 right-2" >
-                                        <X className="w-4 h-4" />
-                                    </Button>
-                                </div>
-                            {/* )} */}
-
-                            {/* {selectedImage && !processedImage && ( */}
-                            <Button className="w-full mt-4" size="lg" >
-
-                                {/* <>
-                                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                    {"Processing..."}
-                                </> */}
-
-                                "Remove Text"
-
-                            </Button>
-                            {/* )} */}
+                                    :
+                                    <button onClick={handleImageUpload} className="flex flex-col items-center justify-center w-full h-80 border-2 border-dashed border-border rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
+                                        <div className="flex flex-col items-center justify-center gap-4">
+                                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted hover:scale-[1.04] cursor-pointer">
+                                                <Upload className="h-8 w-8 text-muted-foreground" />
+                                            </div>
+                                            <div className="text-center">
+                                                <p className="text-sm font-medium">Clique para carregar a imagem</p>
+                                                <p className="text-xs text-muted-foreground mt-1">PNG, JPG, WEBP up to 10MB</p>
+                                            </div>
+                                        </div>
+                                        <input
+                                            type='file'
+                                            className='hidden'
+                                            accept='image/png'
+                                            ref={inputRef}
+                                            onChange={(e) => { ObterImage(e) }}
+                                        />
+                                    </button>
+                            }
+                            {
+                                file &&
+                                <Button onClick={handleRemoveText} className="w-full mt-4 bg-[#006666] hover:scale-[1.02] hover:bg-[#006666] font-extrabold" disabled={loading} size="lg" >Remover texto</Button>
+                            }
                         </Card>
-
-                        {/* Result Section */}
                         <Card className="p-6">
-                            <h2 className="text-xl font-semibold mb-4">Imagem processada</h2>
-
-                            {/* {processedImage ? (
-                                <div className="space-y-4">
-                                    <img
-                                        src={processedImage || "/placeholder.svg"}
-                                        alt="Processed"
-                                        className="w-full h-80 object-contain rounded-lg bg-muted"
-                                    />
-                                    <Button className="w-full" size="lg" onClick={handleDownload}>
-                                        <Download className="w-4 h-4 mr-2" />
-                                        Download Image
-                                    </Button>
-                                </div>
-                            ) : ( */}
-                                <div className="flex items-center justify-center w-full h-80 border-2 border-dashed border-border rounded-lg bg-muted/20">
-                                    <p className="text-sm text-muted-foreground">
-                                        {/* {isProcessing ? "Processing your image..." : "Processed image will appear here"} */}
-                                        Processed image will appear here
-                                    </p>
-                                </div>
-                            {/* )} */}
+                            <div className='grid grid-cols-2' >
+                                <h2 className="text-xl font-semibold mb-4">Imagem Processada</h2>
+                            </div>
+                            {
+                                fileEdit
+                                    ?
+                                    <>
+                                        <div className="relative">
+                                            <img
+                                                src={fileEdit}
+                                                alt="Original"
+                                                className="w-full h-80 object-contain rounded-lg bg-muted p-2"
+                                            />
+                                        </div>
+                                    </>
+                                    :
+                                    <div className="flex items-center justify-center w-full h-80 border-2 border-dashed border-border rounded-lg bg-muted/20">
+                                        <p className="text-sm text-muted-foreground">
+                                            {
+                                                loading
+                                                    ?
+                                                    "Imagem está sendo processada..."
+                                                    :
+                                                    "A imagem processada aparecerá aqui"
+                                            }
+                                        </p>
+                                    </div>
+                            }
+                            {
+                                fileEdit
+                                &&
+                                <Button disabled={loading} variant="outline" size="sm" className="hover:scale-[1.04]"
+                                    onClick={() => handleDownload(fileEdit)}
+                                >
+                                    <Download className="w-4 h-4 mr-2" />
+                                    Download
+                                </Button>
+                            }
                         </Card>
                     </div>
-
-                    
                 </div>
             </div>
         </main>
