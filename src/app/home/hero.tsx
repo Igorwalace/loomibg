@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export function HeroSection() {
     return (
-        <section className="relative overflow-hidden rounded-2xl py-10 bg-gradient-to-r from-pink-100 via-purple-100 to-cyan-100">
+        <section className="relative overflow-hidden rounded-2xl py-10 bg-muted">
             <div className="container mx-auto px-4">
                 <div className="mx-auto max-w-4xl text-center">
                     <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-sm text-accent-foreground">

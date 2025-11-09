@@ -4,7 +4,7 @@ import { FaInstagram } from "react-icons/fa6";
 
 export function Footer() {
     return (
-        <footer className="border-t bg-background rounded-2xl">
+        <footer className="border-t bg-gradient-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl">
             <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
                     {/* Company Info */}

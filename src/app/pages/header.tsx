@@ -14,7 +14,7 @@ import LinksHeader from './components/_links-header'
 function Header() {
   return (
     <>
-      <div className='px-5 py-3 flex items-center justify-between bg-[] rounded-2xl' >
+      <div className='px-5 py-3 flex items-center justify-between bg-gradient-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl' >
         <Link href={'/'} id='logo' className={`${caveat.className} text-4xl font-extrabold text-[#006666]`} >Loomibg</Link>
 
         <LinksHeader />
