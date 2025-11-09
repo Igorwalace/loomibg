@@ -3,6 +3,7 @@ import Header from '../pages/header'
 
 // react icons
 import { CiGrid41 } from "react-icons/ci";
+import Galeria from './galeria';
 
 // pages
 
@@ -21,7 +22,7 @@ function Page() {
         </div>
 
         <div>
-          {/* <ListFiles /> */}
+          <Galeria />
         </div>
 
       </div>
