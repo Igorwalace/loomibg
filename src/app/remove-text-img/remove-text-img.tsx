@@ -2,9 +2,8 @@
 
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { User } from 'firebase/auth'
-import { Download, Loader2, Sparkles, Upload, X } from 'lucide-react'
-import React, { useRef, useState } from 'react'
+import { Download, Sparkles, Upload } from 'lucide-react'
+import React, { useRef } from 'react'
 import useAppUtils from '../context/utils'
 import useAppRemoveBg from '../context/remove-bg'
 import { API_KEY, CLICKDROP_URL_REMOVE_TEXT } from '../utils/ts'
@@ -159,13 +158,15 @@ function RemovetextImg() {
                                 fileEdit
                                     ?
                                     <>
-                                        <div className="relative">
-                                            <img
-                                                src={fileEdit}
-                                                alt="Original"
-                                                className="w-full h-80 object-contain rounded-lg bg-muted p-2"
-                                            />
-                                        </div>
+
+                                        <div className="relative w-[400px] h-[300px]">
+                                        <Image
+                                            src={fileEdit}
+                                            alt="Imagem Original"
+                                            fill
+                                            className="w-full h-80 object-contain rounded-lg bg-muted p-2"
+                                        />
+                                    </div>
                                     </>
                                     :
                                     <div className="flex items-center justify-center w-full h-80 border-2 border-dashed border-border rounded-lg bg-muted/20">

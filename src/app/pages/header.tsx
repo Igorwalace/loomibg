@@ -5,7 +5,6 @@ import React from 'react'
 import { caveat } from '../fonts/fonts'
 
 //shadcn
-import { Separator } from '@/components/ui/separator'
 
 //pages
 import SignIn from './components/sign-in'

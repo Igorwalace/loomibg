@@ -4,7 +4,6 @@
 import { Button } from '@/components/ui/button';
 
 //react
-import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 
 // react-icons

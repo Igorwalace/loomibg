@@ -9,9 +9,9 @@ import useAppUtils from '../context/utils'
 import Image from 'next/image'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge, Calendar, Eye, MoreVertical } from 'lucide-react'
-import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-import { DropdownMenuContent } from '@/components/ui/dropdown-menu'
+import { Badge, Calendar, Eye } from 'lucide-react'
+// import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
+// import { DropdownMenuContent } from '@/components/ui/dropdown-menu'
 
 function Galeria() {
     const [files, setFiles] = useState<any[]>([])
@@ -34,7 +34,6 @@ function Galeria() {
 
                 const result = await storage.listFiles(BUCKET_ID_IMAGE)
 
-                // filtra pelas imagens do usuário
                 const resultsFilter = result.files.filter((file) =>
                     file.name.includes(user.uid)
                 )
@@ -53,7 +52,6 @@ function Galeria() {
             }
         })
 
-        // cleanup listener quando o componente desmonta
         return () => unsub()
     }, [setLoading])
 

@@ -45,7 +45,6 @@ function DialogRemoveBg() {
 
     const [check, setCheck] = useState(false)
     const [textGerention, setTextGerantion] = useState<string>('')
-    const [phrase, setPhrase] = useState('')
     const [hiddenCard, setHiddenCard] = useState(false)
 
     useEffect(() => {
@@ -64,10 +63,10 @@ function DialogRemoveBg() {
         return () => clearInterval(intervalo)
     }, [loading])
 
-    useEffect(() => {
-        const PHRASE = phrases[Math.floor(Math.random() * phrases.length)]
-        setPhrase(PHRASE)
-    }, [])
+    // useEffect(() => {
+    //     const PHRASE = phrases[Math.floor(Math.random() * phrases.length)]
+    //     setPhrase(PHRASE)
+    // }, [])
 
     const RemoveBG = async () => {
         setLoading(true)

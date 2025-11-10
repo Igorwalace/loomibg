@@ -36,7 +36,8 @@ export function ShowcaseSection() {
                             <Image
                                 src="/cidade.png"
                                 fill
-                                quality={100}
+                                sizes="md:w-[90%] w-[60%] md:min-h-[250px] min-h-[200px]"
+                                quality={75}
                                 alt="Background removal example"
                                 className="sm:object-contain object-cover rounded-2xl"
                             />
