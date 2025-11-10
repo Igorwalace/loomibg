@@ -32,8 +32,6 @@ import { API_KEY, CLICKDROP_URL_REMOVE_BG, messages } from '../utils/ts';
 
 // framer motion
 import { motion } from "framer-motion";
-import { handleDownload } from './download';
-import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import Link from 'next/link';
 

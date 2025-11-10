@@ -2,7 +2,6 @@ import React from 'react'
 import Header from '../pages/header'
 
 // react icons
-import { CiGrid41 } from "react-icons/ci";
 import Galeria from './galeria';
 import { Button } from '@/components/ui/button';
 import { Upload } from 'lucide-react';

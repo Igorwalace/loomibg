@@ -12,15 +12,14 @@ import { Button } from '@/components/ui/button'
 import { Calendar, Download, Eye, ImageIcon, MoreVertical, Trash2 } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
-import { ID } from 'appwrite'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 // import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 // import { DropdownMenuContent } from '@/components/ui/dropdown-menu'
 
 function Galeria() {
 
     interface imagens {
-        createdAt: any
+        createdAt: number
         id: string;
         url: string;
         name: string;

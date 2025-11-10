@@ -12,7 +12,6 @@ import DialogLogin from "../rbg/dialog-login";
 import { BUCKET_ID_IMAGE } from "../components/upload";
 import { storage } from "../utils/appwrite";
 import { ID, Permission, Role } from "appwrite";
-import { handleDownload } from "../rbg/download";
 import Link from "next/link";
 
 export default function TextToImagePage() {
