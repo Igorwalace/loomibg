@@ -28,7 +28,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 // utils
 import { auth } from '../utils/firebase';
-import { API_KEY, CLICKDROP_URL_REMOVE_BG, messages, phrases } from '../utils/ts';
+import { API_KEY, CLICKDROP_URL_REMOVE_BG, messages } from '../utils/ts';
 
 // framer motion
 import { motion } from "framer-motion";

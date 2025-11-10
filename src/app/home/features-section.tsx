@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card"
-import { Eraser, Wand2, Palette, Zap, Download, Shield } from "lucide-react"
+import { Eraser, Wand2, Zap, } from "lucide-react"
 import Link from "next/link"
 
 const features = [

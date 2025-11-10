@@ -9,12 +9,19 @@ import useAppUtils from '../context/utils'
 import Image from 'next/image'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge, Calendar, Eye } from 'lucide-react'
+import { Calendar, Eye } from 'lucide-react'
 // import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 // import { DropdownMenuContent } from '@/components/ui/dropdown-menu'
 
 function Galeria() {
-    const [files, setFiles] = useState<any[]>([])
+
+    interface imagens {
+        id: string;
+        url: string;
+        name: string;
+    }[]
+
+    const [files, setFiles] = useState<imagens[]>([])
     const { setLoading, loading } = useAppUtils()
 
     useEffect(() => {
