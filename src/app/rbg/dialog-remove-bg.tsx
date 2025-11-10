@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { BsInfoCircle } from 'react-icons/bs';
 
 // db
-import { ID } from 'appwrite'
+import { ID, Permission, Role } from 'appwrite'
 import { BUCKET_ID_IMAGE } from '../components/upload'
 import { storage } from '../utils/appwrite'
 
@@ -35,6 +35,7 @@ import { motion } from "framer-motion";
 import { handleDownload } from './download';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
+import Link from 'next/link';
 
 function DialogRemoveBg() {
 
@@ -46,6 +47,7 @@ function DialogRemoveBg() {
     const [check, setCheck] = useState(false)
     const [textGerention, setTextGerantion] = useState<string>('')
     const [hiddenCard, setHiddenCard] = useState(false)
+    const [download, setDownloand] = useState('')
 
     useEffect(() => {
         if (!loading) return
@@ -93,17 +95,20 @@ function DialogRemoveBg() {
             const buffer = await response.arrayBuffer();
             const blob = new Blob([buffer], { type: "image/png" });
 
-            const newFile = new File([blob], `${user?.uid}/${user?.uid}.png`, { type: "image/png" });
+            const newFile = new File([blob], `${user?.uid}.png`, { type: "image/png" });
 
             if (!BUCKET_ID_IMAGE) return
             const result = await storage.createFile(
                 BUCKET_ID_IMAGE,
                 ID.unique(),
-                newFile
+                newFile,
+                [Permission.read(Role.any())]
             );
             const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE, result.$id)
+            const GetUrlDownload = storage.getFileDownload(BUCKET_ID_IMAGE, result.$id)
 
             setHiddenCard(true)
+            setDownloand(GetUrlDownload)
             setFileEdit(GetUrlFilePublic)
             setLoading(false)
 
@@ -147,14 +152,12 @@ function DialogRemoveBg() {
                             {
                                 fileEdit
                                 &&
-                                <Button variant="outline" size="sm" className="hover:scale-[1.04]"
-                                    onClick={() => {
-                                        handleDownload(fileEdit)
-                                    }}
+                                <Link href={download} className="hover:scale-[1.04] duration-200 text-sm flex justify-between items-center gap-1 bg-muted p-2 rounded-sm"
+                                    
                                 >
                                     <Download className="w-4 h-4 mr-2" />
                                     Download
-                                </Button>
+                                </Link>
                             }
                         </DialogTitle>
 

@@ -11,14 +11,16 @@ import { auth } from "../utils/firebase";
 import DialogLogin from "../rbg/dialog-login";
 import { BUCKET_ID_IMAGE } from "../components/upload";
 import { storage } from "../utils/appwrite";
-import { ID } from "appwrite";
+import { ID, Permission, Role } from "appwrite";
 import { handleDownload } from "../rbg/download";
+import Link from "next/link";
 
 export default function TextToImagePage() {
 
     const [prompt, setPrompt] = useState<string>('')
     const [imageGenerating, setImageGenerating] = useState<string | null>(null)
     const [hiddenCard, setHiddenCard] = useState(false)
+    const [download, setDownloand] = useState('')
 
     const user = auth.currentUser
 
@@ -56,10 +58,13 @@ export default function TextToImagePage() {
             const result = await storage.createFile(
                 BUCKET_ID_IMAGE,
                 ID.unique(),
-                newFile
+                newFile,
+                [Permission.read(Role.any())]
             );
             const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE, result.$id)
+            const GetUrlDownload = storage.getFileDownload(BUCKET_ID_IMAGE, result.$id)
 
+            setDownloand(GetUrlDownload)
             setImageGenerating(GetUrlFilePublic)
             console.log(GetUrlFilePublic)
             setHiddenCard(true)
@@ -159,14 +164,12 @@ export default function TextToImagePage() {
                             <div className="flex md:flex-row flex-col gap-4 items-center justify-between py-3">
                                 <label className="text-sm font-extrabold">Imagem Gerada - {prompt}</label>
                                 {imageGenerating && (
-                                    <Button variant="outline" size="sm" className="hover:scale-[1.04]"
-                                        onClick={() => {
-                                            handleDownload(imageGenerating)
-                                        }}
-                                    >
-                                        <Download className="w-4 h-4 mr-2" />
-                                        Download
-                                    </Button>
+                                    <Link href={download} className="hover:scale-[1.04] duration-200 text-sm flex justify-between items-center gap-1 bg-muted p-2 rounded-sm"
+                                    
+                                >
+                                    <Download className="w-4 h-4 mr-2" />
+                                    Download
+                                </Link>
                                 )}
                             </div>
 

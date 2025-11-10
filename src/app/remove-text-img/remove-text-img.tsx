@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Download, Sparkles, Upload } from 'lucide-react'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import useAppUtils from '../context/utils'
 import useAppRemoveBg from '../context/remove-bg'
 import { API_KEY, CLICKDROP_URL_REMOVE_TEXT } from '../utils/ts'
@@ -22,6 +22,10 @@ function RemovetextImg() {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     const user = auth.currentUser
+
+    useEffect(() => {
+        setFile(undefined)
+    }, [])
 
     const handleImageUpload = () => {
         setFile(undefined)
@@ -160,13 +164,13 @@ function RemovetextImg() {
                                     <>
 
                                         <div className="relative w-[400px] h-[300px]">
-                                        <Image
-                                            src={fileEdit}
-                                            alt="Imagem Original"
-                                            fill
-                                            className="w-full h-80 object-contain rounded-lg bg-muted p-2"
-                                        />
-                                    </div>
+                                            <Image
+                                                src={fileEdit}
+                                                alt="Imagem Original"
+                                                fill
+                                                className="w-full h-80 object-contain rounded-lg bg-muted p-2"
+                                            />
+                                        </div>
                                     </>
                                     :
                                     <div className="flex items-center justify-center w-full h-80 border-2 border-dashed border-border rounded-lg bg-muted/20">

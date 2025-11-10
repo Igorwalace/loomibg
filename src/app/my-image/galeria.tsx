@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '../utils/firebase'
 import { storage } from '../utils/appwrite'
 import { BUCKET_ID_IMAGE } from '../components/upload'
@@ -9,140 +9,228 @@ import useAppUtils from '../context/utils'
 import Image from 'next/image'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, Eye } from 'lucide-react'
+import { Calendar, Download, Eye, ImageIcon, MoreVertical, Trash2 } from 'lucide-react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import Link from 'next/link'
+import { ID } from 'appwrite'
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 // import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 // import { DropdownMenuContent } from '@/components/ui/dropdown-menu'
 
 function Galeria() {
 
     interface imagens {
+        createdAt: any
         id: string;
         url: string;
         name: string;
+        date: string;
+        downloadUrl: string
     }[]
+
+    const [user, setUser] = useState<User | null>(null)
 
     const [files, setFiles] = useState<imagens[]>([])
     const { setLoading, loading } = useAppUtils()
 
-    useEffect(() => {
-        const unsub = onAuthStateChanged(auth, async (user) => {
-            if (!user) {
-                console.log('Usuário não logado')
-                return
-            }
+    const [order, setOrder] = useState('')
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (u) => {
+            if (!u) return
+            setUser(u)
+        })
+        return () => unsubscribe()
+    }, [])
+
+    useEffect(() => {
+
+        const GET = async () => {
+            if (!user) return;
             try {
-                setLoading(true)
+                setLoading(true);
 
                 if (!BUCKET_ID_IMAGE) {
-                    console.log('Não há bucket id imagem')
-                    return
+                    return;
                 }
 
-                const result = await storage.listFiles(BUCKET_ID_IMAGE)
+                const result = await storage.listFiles(BUCKET_ID_IMAGE);
 
-                const resultsFilter = result.files.filter((file) =>
-                    file.name.includes(user.uid)
-                )
+                const resultsFilter = result.files.filter((file) => {
+                    const match = file.name.includes(user.uid);
+                    return match;
+                });
+
+
 
                 const imagens = resultsFilter.map((file) => ({
                     id: file.$id,
                     url: storage.getFileView(BUCKET_ID_IMAGE!, file.$id),
                     name: file.name,
-                }))
+                    downloadUrl: storage.getFileDownload(BUCKET_ID_IMAGE!, file.$id),
+                    date: new Date(file.$createdAt).toLocaleString('pt-BR', {
+                        dateStyle: 'short',
+                        timeStyle: 'short',
+                    }),
+                    createdAt: new Date(file.$createdAt).getTime(),
+                }));
 
-                setFiles(imagens)
+                console.log(imagens)
+
+                setFiles(imagens);
             } catch (error) {
-                console.error('Erro ao carregar imagens:', error)
+                console.error('💥 Erro ao carregar imagens:', error);
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
-        })
+        };
 
-        return () => unsub()
-    }, [setLoading])
+        GET();
+    }, [user, order]);
+
+    const DeleteFile = async (fileID: string) => {
+        setLoading(true)
+        try {
+            await storage.deleteFile({
+                bucketId: BUCKET_ID_IMAGE!,
+                fileId: fileID
+            });
+
+            setFiles((prev) => prev.filter((file) => file.id !== fileID));
+
+        } catch (error) {
+            console.error("Erro ao deletar arquivo:", error);
+        }
+        finally {
+            setLoading(false)
+        }
+    };
 
     return (
-        <main className="p-4">
-            {loading && <p>Carregando...</p>}
+        <main className="p-4 pb-7">
+            {
+                loading
+                &&
+                <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+                    <span className="loader2"></span>
+                </div>
+            }
 
-            {/* <div className="grid grid-cols-2 gap-4">
-                {files.length > 0 ? (
-                    files.map((file) => (
-                        <div key={file.id} className="border rounded-xl overflow-hidden">
-                            <Image
-                                src={file.url}
-                                width={400}
-                                height={400}
-                                alt={file.name}
-                                className="object-cover"
-                            />
-                        </div>
-                    ))
-                ) : (
-                    !loading && <p>Nenhuma imagem encontrada</p>
-                )}
-            </div> */}
+            <div className="flex items-center justify-between pb-5">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <ImageIcon className="h-4 w-4" />
+                    <span>{files.length} imagens</span>
+                </div>
+                <div className="flex gap-2">
+                    <Button variant="outline" className={`${order != 'Antigas' && 'bg-[#006666] text-white font-black'}`} onClick={() => {
+                        setOrder('Recentes')
+                    }} size="sm">
+                        Recentes
+                    </Button>
+                    <Button variant="outline" className={`${order === 'Antigas' && 'bg-[#006666] text-white font-black'}`} onClick={() => {
+                        setOrder('Antigas')
+                    }} size="sm">
+                        Mais Antigas
+                    </Button>
+                </div>
+            </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-                {
-                    files.map((file) => (
-                        <Card key={file.id} className="group overflow-hidden transition-all hover:shadow-lg">
-                            <div className="relative aspect-video overflow-hidden bg-muted">
-                                <Image
-                                    src={file.url || "/placeholder.svg"}
-                                    alt=''
-                                    fill
-                                    className="object-contain transition-transform duration-300 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/40">
-                                    <div className="flex h-full items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-                                        <Button variant="secondary" size="sm" className="gap-2" >
-                                            <Eye className="h-4 w-4" />
-                                            Visualizar
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div className="p-4">
-                                <div className="flex items-start justify-between">
-                                    <div className="flex-1 space-y-1">
-                                        <h3 className="font-medium leading-none text-card-foreground">Imagem</h3>
-                                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                            <Calendar className="h-3 w-3" />
-                                            <span>12/12/2025</span>
+                {
+                    files
+                        .sort((a, b) =>
+                            order === 'Antigas'
+                                ? a.createdAt - b.createdAt
+                                : b.createdAt - a.createdAt
+                        )
+                        .map((file) => (
+                            <div key={file.id} className='space-y-5' >
+                                <Card className="group overflow-hidden transition-all hover:shadow-lg">
+                                    <div className="relative aspect-video overflow-hidden bg-muted">
+                                        <Image
+                                            src={file.url || "/placeholder.svg"}
+                                            alt=''
+                                            priority
+                                            sizes='w-full'
+                                            fill
+                                            className="object-contain transition-transform duration-300 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/40">
+                                            <div className="flex h-full items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
+
+                                                <AlertDialog>
+                                                    <AlertDialogTrigger className='cursor-pointer bg-white flex justify-center gap-2 items-center px-4 py-2 rounded-sm' >
+                                                        <Eye className="h-4 w-4" />
+                                                        Visualizar
+                                                    </AlertDialogTrigger>
+                                                    <AlertDialogContent className='md:w-3/4 w-[90%]' >
+                                                        <AlertDialogHeader>
+                                                            <AlertDialogTitle>
+                                                                Sua Imagem - Data: {file.date}
+                                                                
+                                                            </AlertDialogTitle>
+                                                            <div>
+                                                                <div className="relative w-full md:h-[400px] h-[250px] bg-muted rounded-2xl">
+                                                                    <Image
+                                                                        src={file.url || "/cidade.png"}
+                                                                        alt=''
+                                                                        priority
+                                                                        sizes='w-full'
+                                                                        fill
+                                                                        className="object-contain"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </AlertDialogHeader>
+                                                        <AlertDialogFooter className='' >
+
+                                                            <AlertDialogCancel className='hover:scale-[1.04] duration-200 '>Voltar</AlertDialogCancel>
+                                                            <Link className='hover:scale-[1.04] duration-200 bg-[#006666] text-white font-black flex justify-center items-center rounded-sm px-2 md:py-0 py-2' href={file.downloadUrl} >
+                                                                Download
+                                                            </Link>
+                                                        </AlertDialogFooter>
+                                                    </AlertDialogContent>
+                                                </AlertDialog>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    {/* <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="h-8 w-8">
-                                    <MoreVertical className="h-4 w-4" />
-                                    <span className="sr-only">Menu de opções</span>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                                <DropdownMenuItem className="gap-2">
-                                    <Download className="h-4 w-4" />
-                                    Baixar
-                                </DropdownMenuItem>
-                                <DropdownMenuItem className="gap-2 text-destructive">
-                                    <Trash2 className="h-4 w-4" />
-                                    Excluir
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu> */}
-                                </div>
+                                    <div className="p-4">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex-1 space-y-1">
+                                                {/* <h3 className="font-medium leading-none text-card-foreground">Imagem</h3> */}
+                                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                                    <Calendar className="h-3 w-3" />
+                                                    <span>{file.date}</span>
+                                                </div>
+                                            </div>
 
-                                {/* <div className="mt-3">
-                        <Badge variant="secondary" className="text-xs">
-                            {image.size}
-                        </Badge>
-                    </div> */}
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                                                        <MoreVertical className="h-4 w-4" />
+                                                        <span className="sr-only">Menu de opções</span>
+                                                    </Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent align="end">
+                                                    <Link href={file.downloadUrl} >
+                                                        <DropdownMenuItem className="gap-2 cursor-pointer">
+                                                            <Download className="h-4 w-4" />
+                                                            Baixar
+                                                        </DropdownMenuItem>
+                                                    </Link>
+                                                    <DropdownMenuItem onClick={() => DeleteFile(file.id)} className="gap-2 text-destructive cursor-pointer">
+                                                        <Trash2 className="h-4 w-4" />
+                                                        Excluir
+                                                    </DropdownMenuItem>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                        </div>
+                                    </div>
+                                </Card>
                             </div>
-                        </Card>
-                    ))
+                        ))
                 }
             </div>
         </main>

@@ -113,7 +113,7 @@ function SignIn() {
                                     </Link>
                                     <Link href='/my-image' className={`${pathname.includes('my-image') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                            Uploads
+                                            Galeria
                                         </DropdownMenuItem>
                                     </Link>
                                     <Link href={'/'}>
