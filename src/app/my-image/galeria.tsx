@@ -41,7 +41,7 @@ function Galeria() {
 
                 const imagens = resultsFilter.map((file) => ({
                     id: file.$id,
-                    url: storage.getFileView(BUCKET_ID_IMAGE, file.$id),
+                    url: storage.getFileView(BUCKET_ID_IMAGE!, file.$id),
                     name: file.name,
                 }))
 
