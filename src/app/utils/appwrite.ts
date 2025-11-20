@@ -1,5 +1,5 @@
 // appwrite
-import { Client, Storage, Account } from "appwrite";
+import { Client, Storage, Account, Databases, TablesDB } from "appwrite";
 
 const END_POINT = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!
 const PROJECT_ID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!
@@ -14,5 +14,7 @@ if (typeof window !== "undefined") {
         .setProject(PROJECT_ID)
 }
 
+
 export const storage = new Storage(client);
 export const account = new Account(client);
+export const databases = new TablesDB(client);

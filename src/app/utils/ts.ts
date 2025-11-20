@@ -27,3 +27,7 @@ export const CLICKDROP_URL_TEXT_TO_IMAGE = process.env.NEXT_PUBLIC_CLICKDROP_URL
 export const CLICKDROP_URL_REMOVE_TEXT = process.env.NEXT_PUBLIC_CLICKDROP_URL_REMOVE_TEXT
 
 export const PROJECT_ID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID
+export const secret = process.env.STRIPE_SECRET_KEY;
+export const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+export const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID
+export const tableId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID

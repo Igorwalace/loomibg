@@ -3,6 +3,7 @@ import "./globals.css";
 import { comfortaa } from "./fonts/fonts";
 import { AppUtils } from "./context/utils";
 import { AppRemoveBg } from "./context/remove-bg";
+import { PlanActive } from "./context/planActive";
 
 export const metadata: Metadata = {
   title: "Loomibg",
@@ -26,13 +27,15 @@ export default function RootLayout({
         cz-shortcut-listen="true"
         className={`${comfortaa.className}`}
       >
-        <AppRemoveBg>
-          <AppUtils>
+        <PlanActive>
+          <AppRemoveBg>
+            <AppUtils>
 
-            {children}
-            {/* <Toaster /> */}
-          </AppUtils>
-        </AppRemoveBg>
+              {children}
+              {/* <Toaster /> */}
+            </AppUtils>
+          </AppRemoveBg>
+        </PlanActive>
       </body>
     </html >
   );

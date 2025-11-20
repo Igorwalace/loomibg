@@ -35,7 +35,7 @@ function Page() {
           </div>
         </div>
 
-        <div>
+        <div className='' >
           <Galeria />
         </div>
 

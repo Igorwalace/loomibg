@@ -13,8 +13,7 @@ import { Calendar, Download, Eye, ImageIcon, MoreVertical, Trash2 } from 'lucide
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
-// import { DropdownMenu, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
-// import { DropdownMenuContent } from '@/components/ui/dropdown-menu'
+import Loading from './loading'
 
 function Galeria() {
 
@@ -30,7 +29,7 @@ function Galeria() {
     const [user, setUser] = useState<User | null>(null)
 
     const [files, setFiles] = useState<imagens[]>([])
-    const { setLoading, loading } = useAppUtils()
+    const { setLoading } = useAppUtils()
 
     const [order, setOrder] = useState('')
 
@@ -107,13 +106,7 @@ function Galeria() {
 
     return (
         <main className="p-4 pb-7">
-            {
-                loading
-                &&
-                <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-                    <span className="loader2"></span>
-                </div>
-            }
+            <Loading />
 
             <div className="flex items-center justify-between pb-5">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">

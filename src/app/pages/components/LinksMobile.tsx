@@ -14,25 +14,27 @@ import {
 
 // firebase
 import { auth } from '@/app/utils/firebase';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 // reacticons
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 // context
 import useAppUtils from '@/app/context/utils';
 import Link from 'next/link';
+import ButtonCheckout from './button-checkout';
+import { useSignOut } from '@/app/sign-out';
+import useAppPlanActive from '@/app/context/planActive';
 
-function SignIn() {
+function LinksMobile() {
 
     const { SignIn } = useAppUtils()
+    const { handleSignOut } = useSignOut();
 
     const [name, setName] = useState<string | null>(null)
 
     const pathname = usePathname();
     const user = auth.currentUser;
-
-    const router = useRouter()
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -44,15 +46,6 @@ function SignIn() {
             }
         });
     }, [])
-
-    const SignOut = () => {
-        signOut(auth).then(() => {
-            console.log('User Desconect')
-            router.push('/')
-        }).catch((error) => {
-            console.log(error)
-        });
-    }
 
     return (
         <div>
@@ -96,6 +89,12 @@ function SignIn() {
                                 <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
                                 <div className='py-5' >
+                                    <div className='pb-5 text-center' >
+                                        <ButtonCheckout />
+                                    </div>
+
+                                    <DropdownMenuSeparator className='border-[#dfdfdf]' />
+
                                     <Link href='/rbg' className={`${pathname === '/rbg' && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
                                             Remover Fundo
@@ -116,6 +115,11 @@ function SignIn() {
                                             Galeria
                                         </DropdownMenuItem>
                                     </Link>
+                                    <Link href='/manage-plan' className={`${pathname.includes('plano') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Gerenciar Plano
+                                        </DropdownMenuItem>
+                                    </Link>
                                     <Link href={'/'}>
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
                                             Mais
@@ -125,7 +129,7 @@ function SignIn() {
 
                                 <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
-                                <DropdownMenuItem onClick={SignOut} className='focus:bg-[#a91006] focus:text-white flex justify-center bg-[#a91006] text-white font-extrabold mt-5 cursor-pointer hover:bg-[#a91006] hover:scale-[1.02] duration-200' >Sair</DropdownMenuItem>
+                                <DropdownMenuItem onClick={handleSignOut} className='focus:bg-[#a91006] focus:text-white flex justify-center bg-[#a91006] text-white font-extrabold mt-5 cursor-pointer hover:bg-[#a91006] hover:scale-[1.02] duration-200' >Sair</DropdownMenuItem>
 
                             </DropdownMenuContent>
                         </DropdownMenu>
@@ -135,4 +139,4 @@ function SignIn() {
     )
 }
 
-export default SignIn
+export default LinksMobile

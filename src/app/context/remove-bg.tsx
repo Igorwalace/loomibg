@@ -14,9 +14,14 @@ export function AppRemoveBg({ children }: {
     const [file, setFile] = useState<File | undefined>(undefined)
     const [fileEdit, setFileEdit] = useState<File | undefined>(undefined)
 
+    const resetRemoveBg = () => {
+        setFileEdit(undefined)
+        setFile(undefined)
+    }
+
     return (
         <AppContext.Provider value={{
-            dialogRemoveBg, setDialogRemoveBg, file, setFile, fileEdit, setFileEdit
+            dialogRemoveBg, setDialogRemoveBg, file, setFile, fileEdit, setFileEdit, resetRemoveBg
         }}>
             {children}
         </AppContext.Provider>

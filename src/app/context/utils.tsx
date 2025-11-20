@@ -6,6 +6,8 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 //next-react
 import { createContext, useContext, useState } from "react"
 import { auth } from "../utils/firebase";
+import { databases } from "../utils/appwrite";
+import { databaseId, tableId } from "../utils/ts";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const AppContext = createContext<any>(undefined);
@@ -20,10 +22,33 @@ export function AppUtils({ children }: {
     const SignIn = async () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
-            .then(() => {
-                // const credential = GoogleAuthProvider.credentialFromResult(result);
-                // const token = credential?.accessToken;
-                // const user = result.user;
+            .then(async (result) => {
+
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+                const user = result.user;
+
+                if (!user || !token || !credential) {
+                    throw new Error('Erro ao fazer login.')
+                }
+
+                try {
+                    await databases.createRow({
+                        databaseId: databaseId!,
+                        tableId: tableId!,
+                        rowId: user.uid,
+                        data: {
+                            planActive: "NOPremium",
+                            credit: 0,
+                        },
+                    });
+                } catch (err: any) {
+                    // Se já existe, tá tudo bem
+                    if (err?.code !== 409) {
+                        console.error("Erro inesperado:", err);
+                    }
+                }
+                
             }).catch(() => {
                 // const errorCode = error.code;
                 // const errorMessage = error.message;
