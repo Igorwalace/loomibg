@@ -84,7 +84,7 @@ function Galeria() {
         };
 
         GET();
-    }, [user, order]);
+    }, [user, order, setLoading]);
 
     const DeleteFile = async (fileID: string) => {
         setLoading(true)

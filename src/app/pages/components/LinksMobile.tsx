@@ -24,7 +24,6 @@ import useAppUtils from '@/app/context/utils';
 import Link from 'next/link';
 import ButtonCheckout from './button-checkout';
 import { useSignOut } from '@/app/sign-out';
-import useAppPlanActive from '@/app/context/planActive';
 
 function LinksMobile() {
 

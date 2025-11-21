@@ -42,13 +42,8 @@ export function AppUtils({ children }: {
                             credit: 0,
                         },
                     });
-                } catch (err: any) {
-                    // Se já existe, tá tudo bem
-                    if (err?.code !== 409) {
-                        console.error("Erro inesperado:", err);
-                    }
-                }
-                
+                } catch (erro) {}
+
             }).catch(() => {
                 // const errorCode = error.code;
                 // const errorMessage = error.message;

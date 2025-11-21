@@ -1,5 +1,5 @@
 // appwrite
-import { Client, Storage, Account, Databases, TablesDB } from "appwrite";
+import { Client, Storage, Account, TablesDB } from "appwrite";
 
 const END_POINT = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!
 const PROJECT_ID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!

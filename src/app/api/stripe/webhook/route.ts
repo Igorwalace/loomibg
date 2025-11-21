@@ -3,7 +3,7 @@ import { databaseId, secret, tableId, webhookSecret } from "@/app/utils/ts";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-export const runtime = "nodejs"; // garante que roda no servidor real, não no edge
+export const runtime = "nodejs"; 
 
 export async function POST(req: Request) {
 
@@ -38,9 +38,9 @@ export async function POST(req: Request) {
 
     try {
         event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
-    } catch (err: any) {
-        console.error("Webhook signature error:", err.message);
-        return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+    } catch (erro) {
+        console.error("Webhook signature error:");
+        return NextResponse.json({ error: `Webhook Error:` }, { status: 400 });
     }
 
     // --- EVENTOS ---
