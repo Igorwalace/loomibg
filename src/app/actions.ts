@@ -23,8 +23,8 @@ const CreateCheckoutStripe = async (userId: string) => {
     },
     payment_method_types: ["card", "boleto"],
     mode: "payment",
-    success_url: "http://localhost:3000/sucess",
-    cancel_url: "http://localhost:3000/error",
+    success_url: process.env.NEXT_PUBLIC_SITE_URL_SUCESS,
+    cancel_url: process.env.NEXT_PUBLIC_SITE_URL_CANCEL,
     line_items: [
       {
         price: process.env.STRIPE_PREMIUM_PRICE_ID,
