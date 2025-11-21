@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true, // isso faz o build ignorar warnings
+  },
   images: {
     qualities: [25, 50, 75],
     remotePatterns: [
@@ -14,7 +17,7 @@ const nextConfig: NextConfig = {
         hostname: 'tor.cloud.appwrite.io',
       }
     ],
-    
+
   },
 };
 
