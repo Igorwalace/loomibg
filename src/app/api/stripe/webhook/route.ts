@@ -3,18 +3,14 @@ import { databaseId, secret, tableId, webhookSecret } from "@/app/utils/ts";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-export const runtime = "nodejs"; 
+export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-
-    
-
     if (!databaseId || !tableId) {
-        return {
-            error: {
-                message: "Erro: Não foi possível encontrar database ou table.",
-            },
-        };
+        return NextResponse.json(
+            { error: "Erro: Não foi possível encontrar database ou table." },
+            { status: 500 }
+        );
     }
 
     if (!secret || !webhookSecret) {
