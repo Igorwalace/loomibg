@@ -4,6 +4,7 @@ import { comfortaa } from "./fonts/fonts";
 import { AppUtils } from "./context/utils";
 import { AppRemoveBg } from "./context/remove-bg";
 import { PlanActive } from "./context/planActive";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Loomibg",
@@ -27,15 +28,15 @@ export default function RootLayout({
         cz-shortcut-listen="true"
         className={`${comfortaa.className}`}
       >
-        <PlanActive>
-          <AppRemoveBg>
-            <AppUtils>
+        <AppUtils>
+          <PlanActive>
+            <AppRemoveBg>
 
               {children}
-              {/* <Toaster /> */}
-            </AppUtils>
-          </AppRemoveBg>
-        </PlanActive>
+              <Toaster />
+            </AppRemoveBg>
+          </PlanActive>
+        </AppUtils>
       </body>
     </html >
   );

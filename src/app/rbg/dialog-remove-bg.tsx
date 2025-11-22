@@ -28,12 +28,13 @@ import { Checkbox } from '@/components/ui/checkbox';
 
 // utils
 import { auth } from '../utils/firebase';
-import { API_KEY, CLICKDROP_URL_REMOVE_BG, messages } from '../utils/ts';
+import { API_KEY, CLICKDROP_URL_REMOVE_BG, getToken, messages } from '../utils/ts';
 
 // framer motion
 import { motion } from "framer-motion";
 import { Download } from 'lucide-react';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 function DialogRemoveBg() {
 
@@ -46,6 +47,12 @@ function DialogRemoveBg() {
     const [textGerention, setTextGerantion] = useState<string>('')
     const [hiddenCard, setHiddenCard] = useState(false)
     const [download, setDownloand] = useState('')
+
+    const ResetState = () => {
+        setDialogRemoveBg(false)
+        setFileEdit(undefined)
+        setHiddenCard(false)
+    }
 
     useEffect(() => {
         if (!loading) return
@@ -63,11 +70,6 @@ function DialogRemoveBg() {
         return () => clearInterval(intervalo)
     }, [loading])
 
-    // useEffect(() => {
-    //     const PHRASE = phrases[Math.floor(Math.random() * phrases.length)]
-    //     setPhrase(PHRASE)
-    // }, [])
-
     const RemoveBG = async () => {
         setLoading(true)
 
@@ -75,13 +77,42 @@ function DialogRemoveBg() {
             return
         }
 
-        console.log('OK REMOVE_BG')
-
         const form = new FormData();
         form.append("image_file", file);
 
+        const token = await getToken();
+        const check = await fetch("/api/use-credit", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        console.log('check' + check)
+        console.log('token' + token)
+
         try {
+
+            if (check.status === 403) {
+                console.log('Erro. SEM CRÉDITOS')
+                toast.info(
+                    <span>
+                        Você precisa comprar créditos para continuar.{" "}
+                        <a
+                            href="/manage-plan"
+                            className="underline text-blue-400 ml-1"
+                            rel="noopener noreferrer"
+                        >
+                            Comprar agora
+                        </a>
+                    </span>
+                )
+                ResetState()
+                return
+            }
+
             setLoading(true)
+
             if (!CLICKDROP_URL_REMOVE_BG) return
             const response = await fetch(CLICKDROP_URL_REMOVE_BG, {
                 method: 'POST',
@@ -90,6 +121,7 @@ function DialogRemoveBg() {
                 },
                 body: form,
             })
+
             const buffer = await response.arrayBuffer();
             const blob = new Blob([buffer], { type: "image/png" });
 
@@ -108,10 +140,11 @@ function DialogRemoveBg() {
             setHiddenCard(true)
             setDownloand(GetUrlDownload)
             setFileEdit(GetUrlFilePublic)
-            setLoading(false)
 
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
     return (
@@ -151,7 +184,7 @@ function DialogRemoveBg() {
                                 fileEdit
                                 &&
                                 <Link href={download} className="hover:scale-[1.04] duration-200 text-sm flex justify-between items-center gap-1 bg-muted p-2 rounded-sm"
-                                    
+
                                 >
                                     <Download className="w-4 h-4 mr-2" />
                                     Download
@@ -227,12 +260,9 @@ function DialogRemoveBg() {
                                         }
                                     </button>
                                     <button
-                                        onClick={() => {
-                                            setFileEdit(undefined)
-                                            setDialogRemoveBg(false)
-                                        }}
+                                        onClick={ResetState}
                                         disabled={loading}
-                                        className={`${loading && 'hidden'} bg-white text-black cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md font-extrabold px-4 py-2 duration-200`}
+                                        className={` bg-white text-black cursor-pointer hover:scale-[1.01] w-full md:w-2/4 rounded-md font-extrabold px-4 py-2 duration-200`}
                                     >
                                         Cancelar
                                     </button>
@@ -246,9 +276,10 @@ function DialogRemoveBg() {
                                             setHiddenCard(false)
                                         }}
                                         disabled={loading}
-                                        className={`bg-[#006666] cursor-pointer hover:scale-[1.01] w-full rounded-md text-white font-extrabold px-4 py-2 duration-200`}
+                                        className="hover:scale-[1.04] w-full text-center text-lg duration-200 font-black bg-muted p-2 rounded-sm"
+
                                     >
-                                        Remover novo fundo
+                                        Fechar
                                     </button>
                                 </div>
                         }

@@ -4,11 +4,13 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Header from '../pages/header'
 import { Footer } from '../home/footer'
-import { useRequireAuth } from './function-redirect'
 import useAppPlanActive from '../context/planActive'
+import UserCurrent from '../active/user-current'
 
 export default function PagamentoConcluido() {
-    useRequireAuth()
+
+    UserCurrent()
+
     const { invoiceUrl } = useAppPlanActive()
 
     return (

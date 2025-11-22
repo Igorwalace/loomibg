@@ -5,8 +5,14 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 //next-react
 import { createContext, useContext, useState } from "react"
+
+// firebase 
 import { auth } from "../utils/firebase";
+
+// appwrite 
 import { databases } from "../utils/appwrite";
+
+// ts
 import { databaseId, tableId } from "../utils/ts";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,16 +45,16 @@ export function AppUtils({ children }: {
                         rowId: user.uid,
                         data: {
                             planActive: "NOPremium",
-                            credit: 0,
+                            credit: 1,
+                            tokenUser: token
                         },
                     });
-                } catch (erro) {}
+                } catch (erro) {
+                    console.log('User já criado.' + erro)
+                }
 
             }).catch(() => {
-                // const errorCode = error.code;
-                // const errorMessage = error.message;
-                // const email = error.customData.email;
-                // const credential = GoogleAuthProvider.credentialFromError(error);
+                throw new Error('Erro ao efetuar login, tente novamente ou entre em contato com o suporte.')
             });
     }
 

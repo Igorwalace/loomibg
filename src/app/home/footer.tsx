@@ -32,35 +32,20 @@ export function Footer() {
                                     Serviços
                                 </Link>
                             </li>
-                            <li>
-                                <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
-                                    Contato
-                                </Link>
-                            </li>
                         </ul>
                     </div>
 
                     {/* Resources */}
-                    {/* <div className="space-y-3">
+                    <div className="space-y-3">
                         <h3 className="text-lg font-semibold">Recursos</h3>
                         <ul className="space-y-2 text-sm">
                             <li>
-                                <Link href="/blog" className="text-muted-foreground hover:text-foreground transition-colors">
-                                    Blog
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
-                                    Documentação
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/support" className="text-muted-foreground hover:text-foreground transition-colors">
-                                    Support
+                                <Link target='_blank' href="mailto:loomibg@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    Suporte
                                 </Link>
                             </li>
                         </ul>
-                    </div> */}
+                    </div>
 
                     {/* Legal */}
                     <div className="space-y-3">

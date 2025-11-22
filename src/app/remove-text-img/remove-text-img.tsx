@@ -97,9 +97,9 @@ function RemovetextImg() {
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
                             <Sparkles className="w-8 h-8 text-[#006666]" />
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Remoção de texto por IA</h1>
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Remoção de Remover Marca d'água</h1>
                         <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-                            Faça o upload de uma imagem e deixe a IA detectar e remover o texto automaticamente, deixando a imagem limpa.
+                            Faça o upload de uma imagem e deixe a IA detectar e remover a marca d'água automaticamente, deixando a imagem limpa.
                         </p>
                     </div>
 

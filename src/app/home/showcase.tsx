@@ -14,7 +14,7 @@ export function ShowcaseSection() {
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2 justify-items-center">
-                    <Card className="overflow-hidden md:border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
+                    <Card className="overflow-hidden border-2 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
                         <div className="relative md:w-[90%] w-[60%] rounded-xl md:min-h-[250px] min-h-[200px] bg-gradient-to-br from-accent/20 to-accent/5">
                             <Image
                                 src="/cadeira.png"
@@ -31,7 +31,7 @@ export function ShowcaseSection() {
                             </p>
                         </div>
                     </Card>
-                    <Card className="overflow-hidden md:border-1 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
+                    <Card className="overflow-hidden border-2 border-dashed border-muted-foreground flex items-center justify-center bg-[#0A1222] px-6 max-w-[90%]">
                         <div className="relative md:w-[90%] w-[60%] md:min-h-[250px] min-h-[200px] rounded-2xl">
                             <Image
                                 src="/cidade.png"

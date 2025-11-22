@@ -14,6 +14,7 @@ function Remove_BG() {
 
     const API_KEY = process.env.NEXT_PUBLIC_CLICKDROP_API_KEY
     const CLICKDROP_URL_REMOVE_BG = process.env.NEXT_PUBLIC_CLICKDROP_URL_REMOVE_BG
+
     if (!API_KEY || !CLICKDROP_URL_REMOVE_BG) return
 
     const RemoveBG = async () => {

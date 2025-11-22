@@ -106,7 +106,7 @@ function LinksMobile() {
                                     </Link>
                                     <Link href={'/remove-text-img'} className={`${pathname.includes('remove') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                            Remover Texto da Imagem
+                                            Remover Marca d'água
                                         </DropdownMenuItem>
                                     </Link>
                                     <Link href='/my-image' className={`${pathname.includes('my-image') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
@@ -116,7 +116,7 @@ function LinksMobile() {
                                     </Link>
                                     <Link href='/manage-plan' className={`${pathname.includes('plano') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                            Gerenciar Plano
+                                            Compras
                                         </DropdownMenuItem>
                                     </Link>
                                     <Link href={'/'}>

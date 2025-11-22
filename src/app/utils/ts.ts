@@ -1,3 +1,4 @@
+import { auth } from "./firebase";
 
 export const messages = [
     "Removendo fundo...",
@@ -31,3 +32,12 @@ export const secret = process.env.STRIPE_SECRET_KEY;
 export const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 export const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID
 export const tableId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID
+
+
+export const getToken = async () => {
+    const user = auth.currentUser;
+    if (!user) throw new Error("Usuário não autenticado!");
+
+    return await user.getIdToken();
+};
+
