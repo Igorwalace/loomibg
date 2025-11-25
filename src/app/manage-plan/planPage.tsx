@@ -9,7 +9,6 @@ import UserCurrent from '../active/user-current'
 function PlanPage() {
 
     const { planCurrent, credit } = useAppPlanActive()
-    const { loading } = useAppUtils()
 
     const checkout = useButtonStripe()
 
@@ -34,7 +33,7 @@ function PlanPage() {
                             </div>
 
                             <div className="flex gap-3">
-                                <button disabled={loading} onClick={checkout} className="w-full p-2 text-sm font-medium bg-[#006666] text-background rounded-md hover:scale-[1.02] hover:bg-[#006666] duration-200 cursor-pointer">
+                                <button onClick={checkout} className="w-full p-2 text-sm font-medium bg-[#006666] text-background rounded-md hover:scale-[1.02] hover:bg-[#006666] duration-200 cursor-pointer">
                                     Comprar créditos
                                 </button>
                             </div>

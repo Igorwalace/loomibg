@@ -54,7 +54,7 @@ export function AppUtils({ children }: {
                 }
 
             }).catch(() => {
-                throw new Error('Erro ao efetuar login, tente novamente ou entre em contato com o suporte.')
+                console.log('Erro ao efetuar login.')
             });
     }
 

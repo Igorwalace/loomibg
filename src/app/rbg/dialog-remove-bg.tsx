@@ -35,6 +35,7 @@ import { motion } from "framer-motion";
 import { Download } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
+import { TostCredit } from '../components/tost-credit';
 
 function DialogRemoveBg() {
 
@@ -79,39 +80,27 @@ function DialogRemoveBg() {
 
         const form = new FormData();
         form.append("image_file", file);
-
-        const token = await getToken();
-        const check = await fetch("/api/use-credit", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        console.log('check' + check)
-        console.log('token' + token)
-
+        
         try {
+            setLoading(true)
+            
+            const token = await getToken();
+            const check = await fetch("/api/use-credit", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
 
+            console.log('check' + check)
+            console.log('token' + token)
             if (check.status === 403) {
                 console.log('Erro. SEM CRÉDITOS')
-                toast.info(
-                    <span>
-                        Você precisa comprar créditos para continuar.{" "}
-                        <a
-                            href="/manage-plan"
-                            className="underline text-blue-400 ml-1"
-                            rel="noopener noreferrer"
-                        >
-                            Comprar agora
-                        </a>
-                    </span>
-                )
+                TostCredit('Seu saldo está zerado. Você precisa comprar créditos para continuar.')
                 ResetState()
                 return
             }
 
-            setLoading(true)
 
             if (!CLICKDROP_URL_REMOVE_BG) return
             const response = await fetch(CLICKDROP_URL_REMOVE_BG, {

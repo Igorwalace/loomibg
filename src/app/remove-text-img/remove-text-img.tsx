@@ -6,13 +6,15 @@ import { Download, Sparkles, Upload } from 'lucide-react'
 import React, { useEffect, useRef } from 'react'
 import useAppUtils from '../context/utils'
 import useAppRemoveBg from '../context/remove-bg'
-import { API_KEY, CLICKDROP_URL_REMOVE_TEXT } from '../utils/ts'
+import { API_KEY, CLICKDROP_URL_REMOVE_TEXT, getToken } from '../utils/ts'
 import { BUCKET_ID_IMAGE } from '../components/upload'
 import { storage } from '../utils/appwrite'
 import { ID } from 'appwrite'
 import { auth } from '../utils/firebase'
 import Image from 'next/image'
 import { handleDownload } from '../rbg/download'
+import { TostCredit } from '../components/tost-credit'
+import DialogLogin from '../rbg/dialog-login'
 
 function RemovetextImg() {
 
@@ -52,6 +54,23 @@ function RemovetextImg() {
 
         try {
             setLoading(true)
+
+            const token = await getToken();
+            const check = await fetch("/api/use-credit", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            console.log('check' + check)
+            console.log('token' + token)
+            if (check.status === 403) {
+                console.log('Erro. SEM CRÉDITOS')
+                TostCredit('Seu saldo está zerado. Você precisa comprar créditos para continuar.')
+                return
+            }
+
             if (!CLICKDROP_URL_REMOVE_TEXT) return
             const response = await fetch(CLICKDROP_URL_REMOVE_TEXT, {
                 method: 'POST',
@@ -75,10 +94,11 @@ function RemovetextImg() {
 
             // setHiddenCard(true)
             setFileEdit(GetUrlFilePublic)
-            setLoading(false)
 
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
     const handleNewImage = () => {

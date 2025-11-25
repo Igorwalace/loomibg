@@ -6,13 +6,14 @@ import { Download, ImageIcon, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import useAppUtils from "../context/utils";
-import { API_KEY, CLICKDROP_URL_TEXT_TO_IMAGE } from "../utils/ts";
+import { API_KEY, CLICKDROP_URL_TEXT_TO_IMAGE, getToken } from "../utils/ts";
 import { auth } from "../utils/firebase";
 import DialogLogin from "../rbg/dialog-login";
 import { BUCKET_ID_IMAGE } from "../components/upload";
 import { storage } from "../utils/appwrite";
 import { ID, Permission, Role } from "appwrite";
 import Link from "next/link";
+import { TostCredit } from "../components/tost-credit";
 
 export default function TextToImagePage() {
 
@@ -40,6 +41,22 @@ export default function TextToImagePage() {
 
         try {
             setLoading(true)
+
+            const token = await getToken();
+            const check = await fetch("/api/use-credit", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            if (check.status === 403) {
+                console.log('Erro. SEM CRÉDITOS')
+                TostCredit('Seu saldo está zerado. Você precisa comprar créditos para continuar.')
+                handleGeneratingNewImage()
+                return
+            }
+
             if (!CLICKDROP_URL_TEXT_TO_IMAGE) return
             const response = await fetch(CLICKDROP_URL_TEXT_TO_IMAGE, {
                 method: 'POST',
@@ -68,10 +85,10 @@ export default function TextToImagePage() {
             console.log(GetUrlFilePublic)
             setHiddenCard(true)
 
-            setLoading(false)
-
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
     const handleGeneratingNewImage = () => {
@@ -82,7 +99,6 @@ export default function TextToImagePage() {
 
     return (
         <div className="bg-muted rounded-2xl">
-            <DialogLogin />
             <div className="container mx-auto px-4 py-10 max-w-6xl">
                 {/* Header */}
                 <div className="text-center mb-12">
@@ -164,11 +180,11 @@ export default function TextToImagePage() {
                                 <label className="text-sm font-extrabold">Imagem Gerada - {prompt}</label>
                                 {imageGenerating && (
                                     <Link href={download} className="hover:scale-[1.04] duration-200 text-sm flex justify-between items-center gap-1 bg-muted p-2 rounded-sm"
-                                    
-                                >
-                                    <Download className="w-4 h-4 mr-2" />
-                                    Download
-                                </Link>
+
+                                    >
+                                        <Download className="w-4 h-4 mr-2" />
+                                        Download
+                                    </Link>
                                 )}
                             </div>
 

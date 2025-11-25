@@ -60,7 +60,6 @@ function RemoveBG() {
     return (
         <>
             <div className='relative lg:w-[60%] md:w-[70%] w-[95%] h-[420px] mb-5 border-2 border-dashed border-border bg-white rounded-2xl'>
-                <DialogLogin />
                 <DialogRemoveBg />
                 {/* <Image
                     className='absolute z-0 rounded-2xl'

@@ -6,10 +6,12 @@ import useAppUtils from '@/app/context/utils'
 import { auth } from '@/app/utils/firebase'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { BsInfoCircle } from 'react-icons/bs'
 
 function ButtonCheckout() {
+    const router = useRouter()
     const { planCurrent } = useAppPlanActive()
     const { loading } = useAppUtils()
     const user = auth.currentUser
@@ -25,6 +27,9 @@ function ButtonCheckout() {
                     <>
                         <Button
                             size="lg"
+                            onClick={()=>{
+                            router.push('/manage-plan')
+                        }}
                             className="bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-lg shadow-lg"
                         >
                             ✨ {planCurrent}
@@ -39,7 +44,7 @@ function ButtonCheckout() {
                                         ?
                                         'Redirecionando'
                                         :
-                                        'Comprar créditos'
+                                        'Seja Premium'
                                 }
                             </button>
                             <Popover>

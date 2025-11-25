@@ -24,6 +24,8 @@ import useAppUtils from '@/app/context/utils';
 import Link from 'next/link';
 import ButtonCheckout from './button-checkout';
 import { useSignOut } from '@/app/sign-out';
+import LinkMore from './link-more';
+import { House } from 'lucide-react';
 
 function LinksMobile() {
 
@@ -94,14 +96,19 @@ function LinksMobile() {
 
                                     <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
+                                    <Link href={'/'} className={`${pathname === '/' && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Início
+                                        </DropdownMenuItem>
+                                    </Link>
                                     <Link href='/rbg' className={`${pathname === '/rbg' && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
                                             Remover Fundo
                                         </DropdownMenuItem>
                                     </Link>
-                                    <Link href={'/text-to-img'} className={`${pathname.includes('text-to-img') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
+                                    <Link href={'/upscaling'} className={`${pathname.includes('upscaling') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                            Transformar Texto p/ Imagem
+                                            Qualidade de imagens
                                         </DropdownMenuItem>
                                     </Link>
                                     <Link href={'/remove-text-img'} className={`${pathname.includes('remove') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
@@ -119,11 +126,7 @@ function LinksMobile() {
                                             Compras
                                         </DropdownMenuItem>
                                     </Link>
-                                    <Link href={'/'}>
-                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                            Mais
-                                        </DropdownMenuItem>
-                                    </Link>
+                                    <LinkMore pathname={pathname} />
                                 </div>
 
                                 <DropdownMenuSeparator className='border-[#dfdfdf]' />

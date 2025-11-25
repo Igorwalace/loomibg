@@ -39,6 +39,8 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: `Webhook Error:` }, { status: 400 });
     }
 
+    console.log("WEBHOOK RECEIVED:"+event.id);
+
     // --- EVENTOS ---
     // --- EVENTOS ---
     switch (event.type) {
@@ -74,14 +76,17 @@ export async function POST(req: Request) {
             });
 
             const currentCredits = row.credit ?? 0;
+            const creditosNew = currentCredits + 20
 
-            await databases.updateRow({
+            console.log('Seus créditos atuais:' + currentCredits)
+
+            const promisseUpdate = await databases.updateRow({
                 databaseId,
                 tableId,
                 rowId: authUserId!,
                 data: {
                     planActive: "Premium",
-                    credit: currentCredits + 50,
+                    credit: creditosNew,
                     Receipt: invoiceUrl
                 }
             })
@@ -96,7 +101,6 @@ export async function POST(req: Request) {
             break;
         }
     }
-
 
     return NextResponse.json({ received: true });
 }

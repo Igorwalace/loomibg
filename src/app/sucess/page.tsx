@@ -136,7 +136,7 @@ export default function PagamentoConcluido() {
                         </Button>
                     </div>
 
-                    {/* Footer Note */}
+                    {/* Footer*/}
                     <p className="text-center text-sm text-muted-foreground mt-8">
                         Precisa de ajuda? Entre em contato com nosso{' '}
                         <Link target='_blank' href="mailto:loomibg@gmail.com" className="text-primary hover:underline font-medium">

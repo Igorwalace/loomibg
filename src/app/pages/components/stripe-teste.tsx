@@ -5,9 +5,11 @@ import useAppUtils from '@/app/context/utils';
 import { auth } from '@/app/utils/firebase';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useRouter } from 'next/navigation';
 import { BsInfoCircle } from 'react-icons/bs';
 
 function Stripe() {
+    const router = useRouter()
     const { loading } = useAppUtils()
     const { planCurrent } = useAppPlanActive()
 
@@ -22,11 +24,13 @@ function Stripe() {
                     ?
                     planCurrent && planCurrent === 'Premium'
                         ?
-                        <Button
+                        <Button onClick={()=>{
+                            router.push('/manage-plan')
+                        }}
                             size="lg"
                             className="bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-lg shadow-lg"
                         >
-                            ✨ {planCurrent}
+                            ✨ Premium
                         </Button>
                         :
                         <div className='cursor-pointer duration-200 hover:scale-[1.02]'>
@@ -39,7 +43,7 @@ function Stripe() {
                                                     ?
                                                     'Redirecionando'
                                                     :
-                                                    'Comprar créditos'
+                                                    'Seja Premium'
                                             }
                                         </button>
                                         <Popover>
