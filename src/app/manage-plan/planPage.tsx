@@ -44,9 +44,9 @@ function PlanPage() {
                             <div className="flex flex-col md:flex-row gap-3 justify-between text-sm">
                                 <span className="font-medium">Créditos usados neste mês</span>
                                 <div className='flex gap-2 items-center' >
-                                    <p className="text-xs text-muted-foreground">Você usou { } dos seus créditos mensais:</p>
+                                    <p className="text-xs text-muted-foreground">Créditos disponíveis:</p>
                                     <span className="text-xs text-muted-foreground">
-                                        0 / {credit}
+                                        {credit}
                                     </span>
                                 </div>
                             </div>
