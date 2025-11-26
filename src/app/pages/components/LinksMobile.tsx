@@ -96,6 +96,11 @@ function LinksMobile() {
 
                                     <DropdownMenuSeparator className='border-[#dfdfdf]' />
 
+                                    <Link href='/manage-plan' className={`${pathname.includes('manage-plan') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
+                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
+                                            Gerenciar Compras
+                                        </DropdownMenuItem>
+                                    </Link>
                                     <Link href={'/'} className={`${pathname === '/' && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
                                             Início
@@ -118,12 +123,7 @@ function LinksMobile() {
                                     </Link>
                                     <Link href='/my-image' className={`${pathname.includes('my-image') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                            Galeria
-                                        </DropdownMenuItem>
-                                    </Link>
-                                    <Link href='/manage-plan' className={`${pathname.includes('manage-plan') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
-                                        <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
-                                            Compras
+                                            Meus salvos
                                         </DropdownMenuItem>
                                     </Link>
                                     <LinkMore pathname={pathname} />

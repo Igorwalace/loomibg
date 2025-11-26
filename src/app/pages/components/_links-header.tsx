@@ -17,7 +17,7 @@ function LinksHeader() {
             <Link href={'/remove-text-img'} className={`${pathname.includes('remove') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>Remover Marca d'água</Link>
             <LinkMore pathname={pathname} />
             <div>
-                <Stripe />
+                <Stripe pathname={pathname} />
             </div>
         </div>
     )

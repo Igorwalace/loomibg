@@ -23,13 +23,13 @@ function Page() {
                 <p className="mt-1 text-sm text-muted-foreground">Todas as suas imagens em um só lugar</p>
               </div>
 
-              <div className="flex md:flex-row flex-col gap-4 items-center justify-between py-3">
+              {/* <div className="flex md:flex-row flex-col gap-4 items-center justify-between py-3">
                 <Button variant="outline" size="sm" className="hover:scale-[1.04]"
                 >
                   <Upload className="w-4 h-4 mr-2" />
                   Adicionar
                 </Button>
-              </div>
+              </div> */}
 
             </div>
           </div>

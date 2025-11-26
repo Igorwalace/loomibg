@@ -44,7 +44,7 @@ function ButtonCheckout() {
                                         ?
                                         'Redirecionando'
                                         :
-                                        'Seja Premium'
+                                        'Comprar créditos'
                                 }
                             </button>
                             <Popover>

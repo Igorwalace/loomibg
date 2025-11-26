@@ -1,22 +1,21 @@
 'use client'
-import { useButtonStripe } from '@/app/active/button-stripe';
 import useAppPlanActive from '@/app/context/planActive';
-import useAppUtils from '@/app/context/utils';
 import { auth } from '@/app/utils/firebase';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BsInfoCircle } from 'react-icons/bs';
 
-function Stripe() {
+interface StripeProps {
+    pathname: string
+}
+
+function Stripe({ pathname }: StripeProps) {
     const router = useRouter()
-    const { loading } = useAppUtils()
     const { planCurrent } = useAppPlanActive()
 
     const user = auth.currentUser
-
-    const checkout = useButtonStripe()
-
     return (
         <>
             {
@@ -24,7 +23,7 @@ function Stripe() {
                     ?
                     planCurrent && planCurrent === 'Premium'
                         ?
-                        <Button onClick={()=>{
+                        <Button onClick={() => {
                             router.push('/manage-plan')
                         }}
                             size="lg"
@@ -36,16 +35,10 @@ function Stripe() {
                         <div className='cursor-pointer duration-200 hover:scale-[1.02]'>
                             {
                                 <>
-                                    <div className='flex gap-2' >
-                                        <button disabled={loading} onClick={checkout} >
-                                            {
-                                                loading
-                                                    ?
-                                                    'Redirecionando'
-                                                    :
-                                                    'Seja Premium'
-                                            }
-                                        </button>
+                                    <div className={`${pathname.includes('manage') && 'font-bold text-[#006666] border-b-2 border-[#006666]'} flex gap-2`}  >
+                                        <Link href={'/manage-plan'}>
+                                            Gerenciar Compras
+                                        </Link>
                                         <Popover>
                                             <PopoverTrigger className='cursor-pointer' >
                                                 <BsInfoCircle />

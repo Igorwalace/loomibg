@@ -1,19 +1,30 @@
 'use client'
 
+// react
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+// firebase
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '../utils/firebase'
+
+// appwrite
 import { storage } from '../utils/appwrite'
-import { BUCKET_ID_IMAGE } from '../components/upload'
 import { Query } from 'appwrite';
+
+// pages
+import { BUCKET_ID_IMAGE } from '../components/upload'
 import useAppUtils from '../context/utils'
-import Image from 'next/image'
+
+// shadcn
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, Download, Eye, ImageIcon, MoreVertical, Trash2 } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import Link from 'next/link'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
+
+// icons
+import { Calendar, Download, Eye, ImageIcon, MoreVertical, Trash2 } from 'lucide-react'
 
 function Galeria() {
 
