@@ -53,8 +53,40 @@ function PlanPage() {
                         </div>
                     </div>
 
+                    {/* Pro Plan */}
+                        <div className="rounded-lg border border-blue-500/50 bg-card p-6 flex flex-col relative shadow-lg shadow-blue-500/5">
+                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full">
+                                Recomendado
+                            </div>
+                            <div className="mb-4">
+                                <h3 className="font-semibold text-lg">Créditos</h3>
+                                <div className="mt-2 flex items-baseline gap-1">
+                                    <span className="text-3xl font-bold">R$19,90</span>
+                                    <span className="text-muted-foreground"></span>
+                                </div>
+                                <p className="text-sm text-muted-foreground mt-2">Use todos os créditos como quiser</p>
+                            </div>
+                            <ul className="space-y-3 mb-8 flex-1">
+                                <li className="flex items-start gap-2 text-sm">
+                                    <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                                    <span>20 créditos</span>
+                                </li>
+                                <li className="flex items-start gap-2 text-sm">
+                                    <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                                    <span>Salvar imagens processadas</span>
+                                </li>
+                                <li className="flex items-start gap-2 text-sm">
+                                    <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                                    <span>Acesso a todas as funcionalidades</span>
+                                </li>
+                                <li className="flex items-start gap-2 text-sm">
+                                    <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
+                                    <span>Suporte prioritário por e-mail</span>
+                                </li>
+                            </ul>
+                        </div>
+
                     {/* Available Plans */}
-                    <div className="grid md:grid-cols-3 gap-6">
                         {/* Free Plan */}
                         <div className="rounded-lg border border-border bg-card p-6 flex flex-col">
                             <div className="mb-4">
@@ -75,6 +107,10 @@ function PlanPage() {
                                 </li>
                                 <li className="flex items-start gap-2 text-sm">
                                     <X className="w-4 h-4 mt-0.5 text-red-500 shrink-0" />
+                                    <span>Salvar imagens processadas</span>
+                                </li>
+                                <li className="flex items-start gap-2 text-sm">
+                                    <X className="w-4 h-4 mt-0.5 text-red-500 shrink-0" />
                                     <span>Acesso a todas as funcionalidades</span>
                                 </li>
                                 <li className="flex items-start gap-2 text-sm">
@@ -83,39 +119,6 @@ function PlanPage() {
                                 </li>
                             </ul>
                         </div>
-
-                        {/* Pro Plan */}
-                        <div className="rounded-lg border border-blue-500/50 bg-card p-6 flex flex-col relative shadow-lg shadow-blue-500/5">
-                            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full">
-                                Recomendado
-                            </div>
-                            <div className="mb-4">
-                                <h3 className="font-semibold text-lg">Créditos</h3>
-                                <div className="mt-2 flex items-baseline gap-1">
-                                    <span className="text-3xl font-bold">R$19,90</span>
-                                    <span className="text-muted-foreground"></span>
-                                </div>
-                                <p className="text-sm text-muted-foreground mt-2">Use todos os créditos como quiser</p>
-                            </div>
-                            <ul className="space-y-3 mb-8 flex-1">
-                                <li className="flex items-start gap-2 text-sm">
-                                    <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
-                                    <span>20 créditos</span>
-                                </li>
-                                <li className="flex items-start gap-2 text-sm">
-                                    <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
-                                    <span>Acesso a todas as funcionalidades</span>
-                                </li>
-                                <li className="flex items-start gap-2 text-sm">
-                                    <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
-                                    <span>Suporte prioritário por e-mail</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-
                 </main>
             </div>
         </div>
