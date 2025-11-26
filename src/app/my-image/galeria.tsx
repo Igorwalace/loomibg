@@ -5,6 +5,7 @@ import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '../utils/firebase'
 import { storage } from '../utils/appwrite'
 import { BUCKET_ID_IMAGE } from '../components/upload'
+import { Query } from 'appwrite';
 import useAppUtils from '../context/utils'
 import Image from 'next/image'
 import { Card } from '@/components/ui/card'
@@ -52,14 +53,18 @@ function Galeria() {
                     return;
                 }
 
-                const result = await storage.listFiles(BUCKET_ID_IMAGE);
+                const result = await storage.listFiles(
+                    BUCKET_ID_IMAGE,
+                    [
+                        Query.limit(100),            // Traz o máximo permitido por página (100)
+                        // Query.search('name', user.uid) // Filtra arquivos onde o nome contém o UID
+                    ]
+                );
 
                 const resultsFilter = result.files.filter((file) => {
                     const match = file.name.includes(user.uid);
                     return match;
                 });
-
-
 
                 const imagens = resultsFilter.map((file) => ({
                     id: file.$id,
@@ -72,8 +77,6 @@ function Galeria() {
                     }),
                     createdAt: new Date(file.$createdAt).getTime(),
                 }));
-
-                console.log(imagens)
 
                 setFiles(imagens);
             } catch (error) {
@@ -160,7 +163,7 @@ function Galeria() {
                                                         <AlertDialogHeader>
                                                             <AlertDialogTitle>
                                                                 Sua Imagem - Data: {file.date}
-                                                                
+
                                                             </AlertDialogTitle>
                                                             <div>
                                                                 <div className="relative w-full md:h-[400px] h-[250px] bg-muted rounded-2xl">

@@ -121,7 +121,7 @@ function LinksMobile() {
                                             Galeria
                                         </DropdownMenuItem>
                                     </Link>
-                                    <Link href='/manage-plan' className={`${pathname.includes('plano') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
+                                    <Link href='/manage-plan' className={`${pathname.includes('manage-plan') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`}>
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
                                             Compras
                                         </DropdownMenuItem>

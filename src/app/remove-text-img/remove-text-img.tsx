@@ -14,7 +14,6 @@ import { auth } from '../utils/firebase'
 import Image from 'next/image'
 import { handleDownload } from '../rbg/download'
 import { TostCredit } from '../components/tost-credit'
-import DialogLogin from '../rbg/dialog-login'
 
 function RemovetextImg() {
 
@@ -31,12 +30,13 @@ function RemovetextImg() {
 
     const handleImageUpload = () => {
         setFile(undefined)
-        if (user === null) {
+        if (!user) {
             setDialogNoLogin(true)
             return
         }
         inputRef.current?.click()
     }
+
     const ObterImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const maxSize = 30 * 1024 * 1024; // 30MB
         const FILE = e.target.files?.[0]
@@ -48,6 +48,7 @@ function RemovetextImg() {
         setFile(FILE)
         e.target.value = "";
     }
+
     const handleRemoveText = async () => {
         const form = new FormData();
         form.append("image_file", file);
