@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       },
       {
         hostname: 'tor.cloud.appwrite.io',
+      },
+      {
+        hostname: 'res.cloudinary.com',
       }
     ],
 

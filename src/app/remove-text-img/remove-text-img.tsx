@@ -14,6 +14,7 @@ import { auth } from '../utils/firebase'
 import Image from 'next/image'
 import { handleDownload } from '../rbg/download'
 import { TostCredit } from '../components/tost-credit'
+import VerifyCredit from '../active/verify-credit'
 
 function RemovetextImg() {
 
@@ -56,16 +57,7 @@ function RemovetextImg() {
         try {
             setLoading(true)
 
-            const token = await getToken();
-            const check = await fetch("/api/use-credit", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            console.log('check' + check)
-            console.log('token' + token)
+            const check = await VerifyCredit()
             if (check.status === 403) {
                 console.log('Erro. SEM CRÉDITOS')
                 TostCredit('Seu saldo está zerado. Você precisa comprar créditos para continuar.')

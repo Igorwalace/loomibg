@@ -36,6 +36,7 @@ import { Download } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { TostCredit } from '../components/tost-credit';
+import VerifyCredit from '../active/verify-credit';
 
 function DialogRemoveBg() {
 
@@ -84,23 +85,12 @@ function DialogRemoveBg() {
         try {
             setLoading(true)
             
-            const token = await getToken();
-            const check = await fetch("/api/use-credit", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            console.log('check' + check)
-            console.log('token' + token)
+            const check = await VerifyCredit()
             if (check.status === 403) {
                 console.log('Erro. SEM CRÉDITOS')
                 TostCredit('Seu saldo está zerado. Você precisa comprar créditos para continuar.')
-                ResetState()
                 return
             }
-
 
             if (!CLICKDROP_URL_REMOVE_BG) return
             const response = await fetch(CLICKDROP_URL_REMOVE_BG, {
