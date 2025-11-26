@@ -14,7 +14,6 @@ import { Calendar, Download, Eye, ImageIcon, MoreVertical, Trash2 } from 'lucide
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
-import Loading from './loading'
 
 function Galeria() {
 
@@ -53,24 +52,30 @@ function Galeria() {
                     return;
                 }
 
-                const result = await storage.listFiles(
-                    BUCKET_ID_IMAGE,
-                    [
-                        Query.limit(100),            // Traz o máximo permitido por página (100)
-                        // Query.search('name', user.uid) // Filtra arquivos onde o nome contém o UID
-                    ]
-                );
+                const result = await storage.listFiles({
+                    bucketId: BUCKET_ID_IMAGE,
+                    queries: [
+                        Query.limit(1000)
+                    ],
+                });
+
 
                 const resultsFilter = result.files.filter((file) => {
                     const match = file.name.includes(user.uid);
                     return match;
                 });
-
+                // getFileView(BUCKET_ID_IMAGE!, file.$id),
                 const imagens = resultsFilter.map((file) => ({
                     id: file.$id,
-                    url: storage.getFileView(BUCKET_ID_IMAGE!, file.$id),
+                    url: storage.getFileView({
+                        bucketId: BUCKET_ID_IMAGE!,
+                        fileId: file.$id,
+                    }),
                     name: file.name,
-                    downloadUrl: storage.getFileDownload(BUCKET_ID_IMAGE!, file.$id),
+                    downloadUrl: storage.getFileDownload({
+                        bucketId: BUCKET_ID_IMAGE!,
+                        fileId: file.$id
+                    }),
                     date: new Date(file.$createdAt).toLocaleString('pt-BR', {
                         dateStyle: 'short',
                         timeStyle: 'short',
@@ -109,7 +114,6 @@ function Galeria() {
 
     return (
         <main className="p-4 pb-7">
-            <Loading />
 
             <div className="flex items-center justify-between pb-5">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
