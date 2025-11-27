@@ -15,6 +15,7 @@ import { ID, Permission, Role } from "appwrite";
 import Link from "next/link";
 import { TostCredit } from "../components/tost-credit";
 import VerifyCredit from "../active/verify-credit";
+import { read } from "fs";
 
 export default function TextToImagePage() {
 
@@ -26,6 +27,13 @@ export default function TextToImagePage() {
     const user = auth.currentUser
 
     const { setLoading, loading, setDialogNoLogin } = useAppUtils()
+
+    const handlePromptTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        if (e.target.value.length > 50) {
+            return
+        }
+        setPrompt(e.target.value)
+    }
 
     const handleGeneratingImage = async () => {
         if (user === null) {
@@ -65,14 +73,25 @@ export default function TextToImagePage() {
             const newFile = new File([blob], `${user?.uid}/${user?.uid}.png`, { type: "image/png" });
 
             if (!BUCKET_ID_IMAGE) return
-            const result = await storage.createFile(
-                BUCKET_ID_IMAGE,
-                ID.unique(),
-                newFile,
-                [Permission.read(Role.any())]
-            );
-            const GetUrlFilePublic = storage.getFileView(BUCKET_ID_IMAGE, result.$id)
-            const GetUrlDownload = storage.getFileDownload(BUCKET_ID_IMAGE, result.$id)
+
+            const promise = storage.createFile({
+                bucketId: BUCKET_ID_IMAGE,
+                fileId: ID.unique(),
+                file: newFile,
+                permissions: [
+                    Permission.read(Role.any())
+                ]
+            });
+
+            const GetUrlFilePublic = storage.getFileView({
+                bucketId: BUCKET_ID_IMAGE,
+                fileId: (await promise).$id
+            })
+
+            const GetUrlDownload = storage.getFileDownload({
+                bucketId: BUCKET_ID_IMAGE,
+                fileId: (await promise).$id
+            })
 
             setDownloand(GetUrlDownload)
             setImageGenerating(GetUrlFilePublic)
@@ -117,11 +136,13 @@ export default function TextToImagePage() {
                                 id="prompt"
                                 placeholder="Um cachorro na praia de bermuda."
                                 value={prompt}
-                                onChange={(e) => setPrompt(e.target.value)}
+                                onChange={handlePromptTextArea}
                                 className="min-h-[200px] w-full rounded-2xl resize-none p-3 border-2 border-dashed border-border bg-muted/30"
                             // disabled={isGenerating}
                             />
+                            <p className="text-xs text-muted-foreground">{prompt.length} / 50</p>
                             <p className="text-xs text-muted-foreground">Seja específico e descritivo para obter melhores resultados.</p>
+
                         </div>
 
                         {/* {error && (
@@ -171,7 +192,9 @@ export default function TextToImagePage() {
                     <Card className={`p-4 space-y-1 ${!hiddenCard && 'hidden'}`}>
                         <div className="space-y-2">
                             <div className="flex md:flex-row flex-col gap-4 items-center justify-between py-3">
-                                <label className="text-sm font-extrabold">Imagem Gerada - {prompt}</label>
+                                <label className="text-sm font-extrabold">Imagem Gerada: {' '}
+                                    <span className="uppercase" >{prompt}</span>
+                                </label>
                                 {imageGenerating && (
                                     <Link href={download} className="hover:scale-[1.04] duration-200 text-sm flex justify-between items-center gap-1 bg-muted p-2 rounded-sm"
 
@@ -182,13 +205,13 @@ export default function TextToImagePage() {
                                 )}
                             </div>
 
-                            <div className="rounded-2xl border-2 border-dashed border-border bg-muted flex items-center justify-center overflow-hidden">
-                                <div className="relative w-full min-h-[550px] rounded-2xl">
+                            <div className="rounded-2xl border-2 border-dashed border-border flex bg-white items-center justify-center overflow-hidden p-2">
+                                <div className="relative w-full h-[400px] rounded-2xl">
                                     {
                                         imageGenerating
                                         &&
                                         <Image
-                                            className={`rounded-2xl object-contain bg-white`}
+                                            className={`rounded-2xl object-contain`}
                                             src={imageGenerating}
                                             fill
                                             // onLoad={(e) => {

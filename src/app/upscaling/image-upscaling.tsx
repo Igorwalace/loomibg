@@ -16,7 +16,7 @@ import VerifyCredit from '../active/verify-credit'
 
 function ImageUpscaling() {
     const { setFile, file } = useAppRemoveBg()
-    const { setLoading } = useAppUtils()
+    const { setLoading, setDialogNoLogin } = useAppUtils()
     const user = auth.currentUser
 
     // Local state for UI feedback
@@ -33,8 +33,8 @@ function ImageUpscaling() {
 
     const handleTriggerUpload = () => {
         if (!user) {
-            // setDialogNoLogin(true)
-            // return
+            setDialogNoLogin(true)
+            return
         }
         inputRef.current?.click()
     }
@@ -138,7 +138,7 @@ function ImageUpscaling() {
                         <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                         AI Upscaler 2.0
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 pb-2">
+                    <h1 className="mb-4 text-balance text-4xl font-bold text-foreground md:text-5xl">
                         Melhore a qualidade suas fotos.
                     </h1>
                 </div>
@@ -164,7 +164,7 @@ function ImageUpscaling() {
                                         Arraste e solte seu arquivo aqui ou clique para procurar.
                                     </p>
                                 </div>
-                                <span className="inline-flex h-12 items-center justify-center rounded-lg bg-slate-900 px-8 text-sm font-medium text-white transition hover:bg-slate-800">
+                                <span className="inline-flex h-12 items-center justify-center rounded-lg bg-[#006666] font-black px-8 text-sm text-white transition hover:scale-[1.02]">
                                     Selecionar arquivos
                                 </span>
                             </div>

@@ -70,18 +70,24 @@ function RemoveBG() {
                     alt='Banner de fundo'
                 /> */}
 
-                <div className='relative z-10 w-full h-full flex items-center justify-center flex-col gap-4'>
-                    <button onClick={handleButtonClick} className="flex h-16 w-16 items-center justify-center rounded-full bg-muted hover:scale-[1.04] cursor-pointer">
-                        <Upload className="h-8 w-8 text-muted-foreground" />
-                    </button>
-                    {
-                        <Button onClick={handleButtonClick} className='py-8 px-6 bg-[#006666] hover:bg-[#006666] hover:scale-[1.02]' >
-                            <span className='rounded-xl bg-[#347878] p-2' ><LuPlus color='white' /></span>
-                            <span className='font-black' >Iniciar com uma Imagem</span>
-                        </Button>
-
-                    }
-                    <span className='text-sm font-bold' >Ou solte uma imagem (em breve)</span>
+                <div className='relative z-10 min-h-[400px] flex items-center justify-center flex-col gap-4'>
+                    <div
+                        onClick={handleButtonClick}
+                        className="flex-1 flex flex-col items-center justify-center gap-6 p-8 text-center cursor-pointer"
+                    >
+                        <div className="h-20 w-20 rounded-full bg-slate-100 flex items-center justify-center ring-1 ring-slate-200">
+                            <Upload className="h-10 w-10 text-slate-400" />
+                        </div>
+                        <div className="space-y-2">
+                            <h3 className="text-xl font-semibold text-slate-900">Upload de sua imagem</h3>
+                            <p className="text-slate-500 max-w-xs mx-auto">
+                                Arraste e solte seu arquivo aqui ou clique para procurar.
+                            </p>
+                        </div>
+                        <span className="inline-flex h-12 items-center justify-center rounded-lg bg-[#006666] font-black px-8 text-sm text-white transition hover:scale-[1.02]">
+                            Selecionar arquivos
+                        </span>
+                    </div>
                     <input
                         type='file'
                         className='hidden'
