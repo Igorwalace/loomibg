@@ -1,17 +1,16 @@
 import React from 'react'
 import Header from '../pages/header'
 import { Footer } from '../home/footer'
+import ImageUpscaling from './quality'
 
-function page() {
+function Upscaling() {
     return (
         <>
             <Header />
-            <div className='min-h-[70vh]' >
-                em breve
-            </div>
+            <ImageUpscaling />
             <Footer />
         </>
     )
 }
 
-export default page
+export default Upscaling

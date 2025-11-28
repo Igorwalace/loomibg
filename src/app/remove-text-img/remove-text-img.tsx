@@ -156,7 +156,7 @@ function RemovetextImg() {
                                         <input
                                             type='file'
                                             className='hidden'
-                                            accept='image/png'
+                                            accept='image/png, image/webp, image/jpeg'
                                             ref={inputRef}
                                             onChange={(e) => { ObterImage(e) }}
                                         />

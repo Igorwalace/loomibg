@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* O Next vai injetar automaticamente a meta aqui */}
+        <link rel="icon" href='/icon.png' />
       </head>
       <body
         cz-shortcut-listen="true"

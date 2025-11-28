@@ -47,7 +47,7 @@ function LinkMore({ pathname }: LinkMoreProps) {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/" className="flex items-center gap-2 py-2 text-muted-foreground hover:text-foreground transition-colors">
+                            <Link href="/upscaling" className="flex items-center gap-2 py-2 text-muted-foreground hover:text-foreground transition-colors">
                                 <Expand color="#ffffff" className='bg-[#006666] p-1 rounded-xs' />
                                 <span>
                                     Expandir imagem

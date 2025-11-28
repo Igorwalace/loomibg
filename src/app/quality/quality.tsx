@@ -19,7 +19,6 @@ function ImageUpscaling() {
     const { setLoading, setDialogNoLogin } = useAppUtils()
     const user = auth.currentUser
 
-    // Local state for UI feedback
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [resultUrl, setResultUrl] = useState<string | null>(null)
 
@@ -203,7 +202,7 @@ function ImageUpscaling() {
                         <input
                             type="file"
                             className="hidden"
-                            accept="image/*"
+                            accept='image/png, image/webp, image/jpeg, image/jpg'
                             ref={inputRef}
                             onChange={handleFileChange}
                         />

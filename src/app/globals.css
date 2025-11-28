@@ -180,10 +180,17 @@
     height: 48px;
     background: #006666;
     transform: rotateX(65deg) rotate(45deg);
-    transform: perspective(200px) rotateX(65deg) rotate(45deg); 
+    transform: perspective(200px) rotateX(65deg) rotate(45deg);
     color: #fff;
     animation: layers1 0.2s linear infinite alternate;
   }
+
+  .bg-banner {
+    background-image: url('/banner.png');
+    background-size: contain;
+    background-position: center;
+  }
+
 
   .loader2:after {
     content: '';

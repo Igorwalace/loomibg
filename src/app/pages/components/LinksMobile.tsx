@@ -111,7 +111,7 @@ function LinksMobile() {
                                             Remover Fundo
                                         </DropdownMenuItem>
                                     </Link>
-                                    <Link href={'/upscaling'} className={`${pathname.includes('upscaling') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
+                                    <Link href={'/quality'} className={`${pathname.includes('quality') && 'font-bold text-[#006666] border-b-2 border-[#006666]'}`} >
                                         <DropdownMenuItem className='cursor-pointer hover:scale-[1.02] duration-200' >
                                             Qualidade de imagens
                                         </DropdownMenuItem>

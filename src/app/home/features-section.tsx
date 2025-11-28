@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card"
-import { Eraser, Wand2, Zap, } from "lucide-react"
+import { Eraser, Images, Sparkles, Trash2, Wand2, Zap, } from "lucide-react"
 import Link from "next/link"
 
 const features = [
@@ -11,38 +11,36 @@ const features = [
             "Remova fundos de qualquer imagem com precisão impecável. A detecção de bordas com IA garante resultados limpos em todos os casos.",
     },
     {
-        icon: Wand2,
-        link: 'text-to-img',
-        title: "Texto para Imagem",
-        description:
-            "Transforme suas palavras em visuais incríveis. Descreva o que quer e veja a IA dar vida à sua imaginação.",
-    },
-    // {
-    //     icon: Palette,
-    //     title: "Edição Inteligente",
-    //     description:
-    //         "Correção de cor automática, remoção de objetos e ferramentas de aprimoramento que entendem sua visão criativa.",
-    // },
-    {
         icon: Zap,
-        link: '/',
+        link: '/quality',
         title: "Velocidade Relâmpago",
         description:
             "Processe imagens em menos de um segundo. Sem esperas, sem atrasos — apenas resultados instantâneos que mantêm seu fluxo de trabalho acelerado.",
     },
-    // {
-    //     icon: Download,
-    //     title: "Processamento em Lote",
-    //     description:
-    //         "Trabalhe com centenas de imagens de uma só vez. Perfeito para e-commerce, equipes de marketing e criadores de conteúdo.",
-    // },
-    // {
-    //     icon: Shield,
-    //     title: "Privacidade em Primeiro Lugar",
-    //     description:
-    //         "Suas imagens são processadas com segurança e nunca são armazenadas. O que você cria continua sendo apenas seu, sempre.",
-    // }
-
+    {
+        icon: Sparkles,
+        link: '/quality',
+        title: "Melhorar Qualidade",
+        description: "Aumente a resolução e qualidade de suas imagens com IA. Transforme fotos antigas em alta definição.",
+    },
+    {
+        icon: Trash2,
+        link: '/rgb',
+        title: "Remover Marca D'água",
+        description: "Elimine marcas d'água e objetos indesejados de forma inteligente, mantendo a qualidade da imagem.",
+    },
+    {
+        icon: Wand2,
+        link: '/text-to-image',
+        title: "Gerar Imagens",
+        description: "Crie imagens profissionais a partir de descrições em texto. Dê vida às suas ideias instantaneamente.",
+    },
+    {
+        icon: Images,
+        link: '/manage-plan',
+        title: "Salve suas imagens",
+        description: "Salve todas as suas imagens processadas.",
+    }
 ]
 
 export function FeaturesSection() {

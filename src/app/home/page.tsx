@@ -1,10 +1,12 @@
 import React from 'react'
+
+// pages
 import Header from '../pages/header'
 import { HeroSection } from './hero'
 import { FeaturesSection } from './features-section'
 import { Footer } from './footer'
-import { ShowcaseSection } from './showcase'
 import FeaturesRemoveText from './features-remove-text'
+import { MagicDemoSection } from './showcase'
 
 function Home() {
   return (
@@ -12,7 +14,7 @@ function Home() {
       <Header />
       <HeroSection />
       <FeaturesSection />
-      <ShowcaseSection />
+      <MagicDemoSection />
       <FeaturesRemoveText />
       <Footer />
     </>
