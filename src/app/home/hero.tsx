@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
 import Link from "next/link"
@@ -26,7 +27,14 @@ export function HeroSection() {
                             Começar agora
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
-                        <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-muted bg-transparent">
+                        <Button
+                            onClick={() => {
+                                document.getElementById("preview")?.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                })
+                            }}
+                            size="lg" variant="outline" className="border-border text-foreground hover:bg-muted bg-transparent" >
                             Ver Preview
                         </Button>
                     </div>
@@ -51,6 +59,6 @@ export function HeroSection() {
                     </div> */}
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

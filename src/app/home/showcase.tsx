@@ -53,9 +53,9 @@ export function MagicDemoSection() {
     const currentDemo = demos.find((d) => d.id === activeTab) || demos[0]
 
     return (
-        <section className="py-24 bg-gradient-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl">
+        <section  id='preview' className="py-10 bg-gradient-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl">
             <div className="container px-4 mx-auto">
-                <div className="text-center mb-16">
+                <div className="text-center mb-6">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
                         <Wand2 className="w-4 h-4 text-[#006666]" />
                         <span className="text-sm font-medium">Demonstração Ao Vivo</span>
@@ -69,7 +69,7 @@ export function MagicDemoSection() {
                 </div>
 
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="max-w-6xl mx-auto">
-                    <TabsList className="grid grid-cols-2 border-white md:grid-cols-4 w-full mb-12 h-auto gap-2 bg-transparent">
+                    <TabsList className="grid grid-cols-2 border-white md:grid-cols-4 w-full mb-6 h-auto gap-2 bg-transparent">
                         {demos.map((demo) => (
                             <TabsTrigger
                                 key={demo.id}
