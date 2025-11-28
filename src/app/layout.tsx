@@ -5,6 +5,7 @@ import { AppUtils } from "./context/utils";
 import { AppRemoveBg } from "./context/remove-bg";
 import { PlanActive } from "./context/planActive";
 import { Toaster } from "@/components/ui/sonner";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Loomibg",
@@ -23,6 +24,19 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         <link rel="icon" href='/icon.png' />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-26KT12DL8D"
+        />
+
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-26KT12DL8D');
+          `}
+        </Script>
       </head>
       <body
         cz-shortcut-listen="true"
