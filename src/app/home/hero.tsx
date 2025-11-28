@@ -23,7 +23,7 @@ export function HeroSection() {
 
                     <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                         <Link href={'/rbg'} className="bg-[#006666] hover:bg-[#006666] h-10 rounded-md px-6 flex items-center justify-center text-primary-foreground hover:scale-[1.01]">
-                            Começar gratuitamente
+                            Começar agora
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                         <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-muted bg-transparent">
