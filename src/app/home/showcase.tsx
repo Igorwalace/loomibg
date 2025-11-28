@@ -57,7 +57,7 @@ export function MagicDemoSection() {
             <div className="container px-4 mx-auto">
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
-                        <Wand2 className="w-4 h-4" />
+                        <Wand2 className="w-4 h-4 text-[#006666]" />
                         <span className="text-sm font-medium">Demonstração Ao Vivo</span>
                     </div>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">
