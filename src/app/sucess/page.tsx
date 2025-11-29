@@ -129,7 +129,7 @@ export default function PagamentoConcluido() {
                         </Button>
 
                         <Button asChild variant="outline" size="lg" className="flex-1 p-2">
-                            <Link target='_blank' href={invoiceUrl || '/'} className="inline-flex items-center justify-center gap-2">
+                            <Link target='_blank' href={invoiceUrl || '/manage-plan'} className="inline-flex items-center justify-center gap-2">
                                 <Download className="w-4 h-4 mr-2" />
                                 Baixar Fatura
                             </Link>

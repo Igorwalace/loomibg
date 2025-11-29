@@ -61,8 +61,8 @@ function LinksMobile() {
                     <>
 
                         <DropdownMenu>
-                            <DropdownMenuTrigger className='rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold flex gap-2 items-center justify-center' >
-                                <Avatar className='border-1 border-white' >
+                            <DropdownMenuTrigger className='rounded-lg cursor-pointer hover:scale-[1.02] duration-200 text-black font-extrabold gap-2 flex items-center justify-center' >
+                                <Avatar className='border-1 hidden md:block border-white' >
                                     <AvatarImage src={user?.photoURL || undefined} />
                                     {
                                         name != undefined
@@ -70,7 +70,8 @@ function LinksMobile() {
                                         <AvatarFallback className='text-black' >{name.charAt(0) + name.charAt(1).toLocaleUpperCase()}</AvatarFallback>
                                     }
                                 </Avatar>
-                                <span className='text-sm text-[#006666] font-extrabold' >{user.displayName}</span>
+                                <span className='text-sm text-[#006666] font-extrabold hidden md:block' >{user.displayName}</span>
+                                <span className='md:hidden text-sm text-[#006666] font-extrabold' >Menu</span>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className='w-[300px] min-h-[200px] mr-5 mt-5 p-5 bg-[#ffff] border-2 border-[#dfdfdf]' >
 

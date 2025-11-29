@@ -132,7 +132,7 @@ export function MagicDemoSection() {
                                 <div className="mt-8 text-center space-y-4">
                                     <p className="text-lg text-muted-foreground">{demo.description}</p>
                                     <Link href={demo.link} className="gap-2 rounded-lg text-white font-black px-3 py-2 bg-[#006666] hover:bg-[#006666]">
-                                        Experimente Agora
+                                        Experimente gratuitamente agora
                                     </Link>
                                 </div>
                             </Card>

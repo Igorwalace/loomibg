@@ -45,7 +45,8 @@ export function AppUtils({ children }: {
                         rowId: user.uid,
                         data: {
                             planActive: "NOPremium",
-                            credit: 0,
+                            credit: 1,
+                            name: user.displayName,
                             tokenUser: token
                         },
                     });

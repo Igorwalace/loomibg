@@ -11,6 +11,7 @@ import LinksHeader from './components/_links-header'
 import LinksMobile from './components/LinksMobile'
 import Loading from '../my-image/loading'
 import DialogLogin from '../rbg/dialog-login'
+import UserName from './userName'
 
 function Header() {
   return (
@@ -21,6 +22,8 @@ function Header() {
         <Link href={'/'} id='logo' className={`${caveat.className} text-4xl font-extrabold text-[#006666]`} >Loomibg</Link>
 
         <LinksHeader />
+
+        <UserName />
 
         <LinksMobile />
       </div>

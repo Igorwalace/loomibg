@@ -97,10 +97,10 @@ function PlanPage() {
                                 {/* <p className="text-sm text-muted-foreground mt-2">Ideal para projetos e experiências de hobby.</p> */}
                             </div>
                             <ul className="space-y-3 mb-8 flex-1">
-                                {/* <li className="flex items-start gap-2 text-sm">
+                                <li className="flex items-start gap-2 text-sm">
                                     <Check className="w-4 h-4 mt-0.5 text-blue-500 shrink-0" />
-                                    <span>1 crédito por mês</span>
-                                </li> */}
+                                    <span>1 crédito para qualquer funcionalidade</span>
+                                </li>
                                 <li className="flex items-start gap-2 text-sm">
                                     <X className="w-4 h-4 mt-0.5 text-red-500 shrink-0" />
                                     <span>Créditos Limidados</span>
