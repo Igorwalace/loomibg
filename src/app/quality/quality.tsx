@@ -103,7 +103,7 @@ function ImageUpscaling() {
 
             const improvedResponse = await fetch(improvedUrl);
             const improvedBlob = await improvedResponse.blob();
-            const newFile = new File([improvedBlob], `${user?.uid}.png`, { type: improvedBlob.type });
+            const newFile = new File([improvedBlob], `quality-${user?.uid}.png`, { type: improvedBlob.type });
 
             if (!BUCKET_ID_IMAGE) return
             const result = await storage.createFile(

@@ -47,11 +47,21 @@ export function AppUtils({ children }: {
                             planActive: "NOPremium",
                             credit: 1,
                             name: user.displayName,
-                            tokenUser: token
+                            tokenUser: token,
+                            email: user.email
                         },
                     });
                 } catch (erro) {
-                    console.log('User já criado.' + erro)
+                    await databases.updateRow({
+                        databaseId: databaseId!,
+                        tableId: tableId!,
+                        rowId: user.uid,
+                        data: {
+                            name: user.displayName,
+                            tokenUser: token,
+                            email: user.email
+                        },
+                    });
                 }
 
             }).catch(() => {

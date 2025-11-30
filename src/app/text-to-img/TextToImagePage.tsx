@@ -70,7 +70,7 @@ export default function TextToImagePage() {
             const buffer = await response.arrayBuffer();
             const blob = new Blob([buffer], { type: "image/png" });
 
-            const newFile = new File([blob], `${user?.uid}/${user?.uid}.png`, { type: "image/png" });
+            const newFile = new File([blob], `texttoiamge-${user?.uid}.png`, { type: "image/png" });
 
             if (!BUCKET_ID_IMAGE) return
 
