@@ -133,7 +133,7 @@ function ImageUpscaling() {
     }
 
     return (
-        <main className="min-h-screen bg-gradient-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl text-slate-900 flex flex-col items-center justify-center p-4 md:p-8 selection:bg-blue-100">
+        <main className="min-h-screen bg-linear-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl text-slate-900 flex flex-col items-center justify-center p-4 md:p-8 selection:bg-blue-100">
             <div className="w-full max-w-5xl mx-auto space-y-12">
 
                 {/* Header Content */}
@@ -149,7 +149,7 @@ function ImageUpscaling() {
 
                 {/* Main Interaction Area */}
                 <div className="w-full relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000" />
+                    <div className="absolute -inset-1 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000" />
 
                     <div className="relative bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col shadow-xl shadow-slate-200/50 min-h-[400px]">
 

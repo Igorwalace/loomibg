@@ -114,7 +114,7 @@ export default function TextToImagePage() {
     }
 
     return (
-        <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl rounded-2xl">
+        <div className="bg-linear-to-r from-pink-100 via-purple-100 to-cyan-100 rounded-2xl">
             <div className="container mx-auto px-4 py-10 max-w-6xl">
                 {/* Header */}
                 <div className="text-center mb-12">

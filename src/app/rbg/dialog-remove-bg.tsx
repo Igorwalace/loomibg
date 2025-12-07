@@ -138,7 +138,7 @@ function DialogRemoveBg() {
 
             <Dialog onOpenChange={setDialogRemoveBg} open={dialogRemoveBg}>
                 <DialogContent
-                    className='w-[100%] md:w-[50%] bg-[#dfdfdf] border-2 lg:max-h-[90vh] max-h-[80vh] border-white overflow-y-auto'
+                    className='w-full md:w-[50%] bg-[#dfdfdf] border-2 lg:max-h-[90vh] max-h-[80vh] border-white overflow-y-auto'
                     onInteractOutside={(e) => e.preventDefault()}
                     onEscapeKeyDown={(e) => e.preventDefault()}
                 >
